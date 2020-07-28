@@ -9,23 +9,23 @@
   transition: font-weight 0.1s ease-in-out;
   margin-top: 6px;
   margin-bottom: 6px;
-  &Selected {
-    font-weight: bold;
-  }
-  &:hover {
-    cursor: pointer;
-    text-decoration-line: underline;
-  }
+}
+.titleSelected {
+  font-weight: bold;
+}
+.title:hover {
+  cursor: pointer;
+  text-decoration-line: underline;
 }
 
 .item {
   display: flex;
   align-items: baseline;
   padding-left: 20px;
-  &Selected {
-    transition: background 0.2s linear 0s;
-    background: #f0f0f0;
-  }
+}
+.itemSelected {
+  transition: background 0.2s linear 0s;
+  background: #f0f0f0;
 }
 
 .subTree {
@@ -37,9 +37,11 @@
   transform: scaleY(0);
   transform-origin: 50% 0;
   transition: max-height 1s ease-out;
-  &Opened {
-    max-height: inherit;
-    transform: scaleY(1);
-    transition: max-height 1s ease-in-out;
-  }
 }
+.subTreeOpened {
+  max-height: inherit;
+  transform: scaleY(1);
+  transition: max-height 1s ease-in-out;
+}
+
+/*# sourceMappingURL=TreeItem.module.css.map */

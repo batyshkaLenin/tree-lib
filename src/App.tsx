@@ -8,7 +8,7 @@ function App() {
 
   useEffect(() => {
     axios.get('testData.json').then((res) => {
-      setTree(res.data)
+      setTimeout(() => setTree(res.data), 500)
     })
   }, [])
 

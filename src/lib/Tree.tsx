@@ -3,6 +3,7 @@ import { TreeData, Page } from 'src/lib/models/TreeData'
 import { TreeHelper } from 'src/lib/helpers/TreeHelper'
 import styles from 'src/lib/Tree.module.scss'
 import TreeItemList from 'src/lib/components/TreeItemList/TreeItemList'
+import Loader from './components/Loader/Loader'
 
 interface Props {
   data?: TreeData
@@ -39,7 +40,7 @@ export const Tree = (props: Props) => {
             selectPage={selectPage}
           />
         ) : (
-          'Loading'
+          <Loader />
         )}
       </ul>
     </nav>
