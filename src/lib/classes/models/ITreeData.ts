@@ -33,7 +33,7 @@ export interface Entities {
   }
 }
 
-export interface IRawData {
+export interface ITreeData {
   entities: Entities
   topLevelIds: string[]
 }

@@ -1,0 +1,26 @@
+.title {
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 19px;
+  letter-spacing: -0.1px;
+  color: #343434;
+  &Selected {
+    font-weight: bold;
+  }
+}
+
+.item {
+  display: flex;
+  align-items: baseline;
+  padding-left: 20px;
+  &Selected {
+    background: #f0f0f0;
+  }
+}
+
+.title:hover {
+  cursor: pointer;
+  text-decoration-line: underline;
+}

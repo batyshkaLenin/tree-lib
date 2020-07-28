@@ -1,7 +1,7 @@
-import { Anchor, Page } from './IRawData'
-import TreeItem from './TreeItem'
+import { Anchor, Page } from '../../classes/models/ITreeData'
+import TreeItem from '../TreeItem/TreeItem'
 import React from 'react'
-import { TreeHelper } from './TreeHelper'
+import { TreeHelper } from '../../classes/helpers/TreeHelper'
 
 interface IProps {
   pages: Page[]

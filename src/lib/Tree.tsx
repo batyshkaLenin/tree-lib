@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Anchor, IRawData, Page } from './IRawData'
-import { TreeHelper } from './TreeHelper'
-import styles from './Tree.module.scss'
-import TreeItemList from './TreeItemList'
+import { Anchor, ITreeData, Page } from 'src/lib/classes/models/ITreeData'
+import { TreeHelper } from 'src/lib/classes/helpers/TreeHelper'
+import styles from 'src/lib/Tree.module.scss'
+import TreeItemList from 'src/lib/components/TreeItemList/TreeItemList'
 
 interface IProps {
-  data?: IRawData
+  data?: ITreeData
 }
 
 export const Tree = (props: IProps) => {
@@ -37,8 +37,8 @@ export const Tree = (props: IProps) => {
   }
 
   return (
-    <>
-      <div className={styles.tree}>
+    <nav className={styles.tree}>
+      <ul className={styles.treeList}>
         {pages && tree ? (
           <TreeItemList
             pages={pages}
@@ -49,7 +49,7 @@ export const Tree = (props: IProps) => {
         ) : (
           'Loading'
         )}
-      </div>
-    </>
+      </ul>
+    </nav>
   )
 }
