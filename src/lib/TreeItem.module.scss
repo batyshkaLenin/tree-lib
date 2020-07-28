@@ -1,0 +1,44 @@
+.title {
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 19px;
+  letter-spacing: -0.1px;
+  color: #343434;
+  &Selected {
+    font-weight: bold;
+    background: #f0f0f0;
+  }
+}
+
+.item {
+  display: flex;
+  padding-left: 11px;
+}
+
+.title:hover {
+  cursor: pointer;
+  text-decoration-line: underline;
+}
+
+.anchors {
+  display: flex;
+  flex-direction: column;
+  transition-duration: 0.2s;
+  transition-delay: 0.15s;
+}
+
+.pages {
+  transition-duration: 0.2s;
+  transition-delay: 0.15s;
+}
+
+.anchor {
+  text-decoration: none;
+  color: #343434;
+}
+
+.selected {
+  background: #f0f0f0;
+}
