@@ -11,6 +11,9 @@ interface IProps {
 export const Tree = (props: IProps) => {
   const [tree, setTree] = useState<TreeHelper>()
   const [pages, setPages] = useState<Page[]>()
+  const [highlightURL, setHighlight] = useState<string>(
+    `${window.location.pathname}${window.location.hash}`
+  )
 
   useEffect(() => {
     if (props.data) {
@@ -21,14 +24,12 @@ export const Tree = (props: IProps) => {
   }, [props.data])
 
   const selectPage = (page: Page) => {
-    tree?.selectPage(page)
-    setPages(tree?.getTree())
+    setHighlight(`/${page.url}`)
     window.history.pushState(page, page.title, page.url)
   }
 
   const selectAnchor = (page: Page, anchor: Anchor) => {
-    tree?.selectAnchor(page, anchor)
-    setPages(tree?.getTree())
+    setHighlight(`/${anchor.url}${anchor.anchor}`)
     window.history.pushState(
       anchor,
       anchor.title,
@@ -41,6 +42,7 @@ export const Tree = (props: IProps) => {
       <ul className={styles.treeList}>
         {pages && tree ? (
           <TreeItemList
+            highlighted={highlightURL}
             pages={pages}
             tree={tree}
             selectAnchor={selectAnchor}
