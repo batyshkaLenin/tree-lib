@@ -1,9 +1,9 @@
-import { Anchor, ITreeData, Page } from 'src/lib/classes/models/ITreeData'
+import { Anchor, TreeData, Page } from 'src/lib/models/TreeData'
 
 export class TreeHelper {
-  private data: ITreeData
+  private data: TreeData
 
-  constructor(data: ITreeData) {
+  constructor(data: TreeData) {
     this.data = data
   }
 

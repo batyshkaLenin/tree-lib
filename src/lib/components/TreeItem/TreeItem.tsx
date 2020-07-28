@@ -1,37 +1,33 @@
 import React, { useState } from 'react'
-import { TreeHelper } from 'src/lib/classes/helpers/TreeHelper'
-import { Anchor, Page } from 'src/lib/classes/models/ITreeData'
+import { TreeHelper } from 'src/lib/helpers/TreeHelper'
+import { Page } from 'src/lib/models/TreeData'
 import Arrow, { Direction } from 'src/lib/components/Arrow/Arrow'
 import styles from './TreeItem.module.scss'
 import classNames from 'classnames'
 import TreeItemList from 'src/lib/components/TreeItemList/TreeItemList'
+import TreeItemAnchor from '../TreeItemAnchor/TreeItemAnchor'
 
-interface IProps {
+interface Props {
   page: Page
-  highlighted: string
+  currentURL: string
   tree: TreeHelper
-  selectPage: (page: Page) => void
-  selectAnchor: (page: Page, anchor: Anchor) => void
+  selectPage: (page: string) => void
 }
 
-const TreeItem = ({
-  page,
-  tree,
-  selectPage,
-  selectAnchor,
-  highlighted,
-}: IProps) => {
-  const [isShow, setShow] = useState<boolean>()
-  const isHighlight = page.url ? highlighted.includes(page.url) : false
+const TreeItem = ({ page, tree, selectPage, currentURL }: Props) => {
+  const [show, setShow] = useState<boolean>()
+  const url = `/${page.url}`
+  const highlight = page.url ? currentURL.includes(url) : false
   const hasChildren = page.pages?.length || page.anchors?.length
+
   return (
     <>
       <li
-        className={classNames(styles.item, isHighlight && styles.itemSelected)}
+        className={classNames(styles.item, highlight && styles.itemSelected)}
         style={{ paddingLeft: `${page.level * 26.45 || 20}px` }}
       >
         {hasChildren ? (
-          isShow ? (
+          show ? (
             <Arrow dir={Direction.UP} />
           ) : (
             <Arrow dir={Direction.DOWN} />
@@ -40,50 +36,38 @@ const TreeItem = ({
         <p
           className={classNames(
             styles.title,
-            `/${page.url}` === highlighted && styles.titleSelected
+            url === currentURL && styles.titleSelected
           )}
           onClick={() => {
             setShow((prevState) => !prevState)
-            selectPage(page)
+            selectPage(url)
           }}
         >
           {page.title}
         </p>
       </li>
-      <ul
-        className={classNames(styles.subTree, isShow && styles.subTreeOpened)}
-      >
-        {isShow && (
+      <ul className={classNames(styles.subTree, show && styles.subTreeOpened)}>
+        {show && (
           <TreeItemList
-            highlighted={highlighted}
+            currentURL={currentURL}
             pages={tree.getChildren(page)}
             tree={tree}
             selectPage={selectPage}
-            selectAnchor={selectAnchor}
           />
         )}
-        {isShow &&
-          tree?.getAnchors(page).map((anchor, key) => (
-            <li
-              key={key}
-              className={classNames(
-                styles.item,
-                isHighlight && styles.itemSelected
-              )}
-              style={{ paddingLeft: `${(page.level + 1) * 26.45}px` }}
-              onClick={() => selectAnchor(page, anchor)}
-            >
-              <p
-                className={classNames(
-                  styles.title,
-                  `/${anchor.url}${anchor.anchor}` === highlighted &&
-                    styles.titleSelected
-                )}
-              >
-                {anchor.title}
-              </p>
-            </li>
-          ))}
+        {show &&
+          tree
+            ?.getAnchors(page)
+            .map((anchor, key) => (
+              <TreeItemAnchor
+                selectPage={selectPage}
+                currentURL={currentURL}
+                page={page}
+                anchor={anchor}
+                key={key}
+                highlight={highlight}
+              />
+            ))}
       </ul>
     </>
   )

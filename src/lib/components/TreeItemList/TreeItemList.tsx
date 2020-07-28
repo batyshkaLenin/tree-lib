@@ -1,31 +1,23 @@
-import { Anchor, Page } from '../../classes/models/ITreeData'
+import { Page } from '../../models/TreeData'
 import TreeItem from '../TreeItem/TreeItem'
 import React from 'react'
-import { TreeHelper } from '../../classes/helpers/TreeHelper'
+import { TreeHelper } from '../../helpers/TreeHelper'
 
-interface IProps {
+interface Props {
   pages: Page[]
-  highlighted: string
+  currentURL: string
   tree: TreeHelper
-  selectPage: (page: Page) => void
-  selectAnchor: (page: Page, anchor: Anchor) => void
+  selectPage: (url: string) => void
 }
 
-const TreeItemList = ({
-  pages,
-  tree,
-  selectAnchor,
-  selectPage,
-  highlighted,
-}: IProps) => {
+const TreeItemList = ({ pages, tree, selectPage, currentURL }: Props) => {
   return (
     <>
       {pages.map((i, key) => (
         <TreeItem
-          highlighted={highlighted}
+          currentURL={currentURL}
           page={i}
           selectPage={selectPage}
-          selectAnchor={selectAnchor}
           tree={tree}
           key={key}
         />

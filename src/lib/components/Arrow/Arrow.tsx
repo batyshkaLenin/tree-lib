@@ -8,11 +8,11 @@ export enum Direction {
   DOWN,
 }
 
-interface IProps {
+interface Props {
   dir: Direction.UP | Direction.DOWN
 }
 
-const Arrow = (props: IProps) => {
+const Arrow = (props: Props) => {
   return (
     <div
       className={classNames(

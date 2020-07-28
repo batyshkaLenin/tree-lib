@@ -9,8 +9,6 @@ export interface Page {
   anchors?: string[]
   pages?: string[]
   selectFirstChildOnClick?: boolean
-  isSelect?: boolean
-  isShow?: boolean
 }
 
 export interface Anchor {
@@ -21,7 +19,6 @@ export interface Anchor {
   disqus_id: string
   anchor: string
   url: string
-  isSelect?: boolean
 }
 
 export interface Entities {
@@ -33,7 +30,7 @@ export interface Entities {
   }
 }
 
-export interface ITreeData {
+export interface TreeData {
   entities: Entities
   topLevelIds: string[]
 }

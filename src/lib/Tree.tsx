@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { Anchor, ITreeData, Page } from 'src/lib/classes/models/ITreeData'
-import { TreeHelper } from 'src/lib/classes/helpers/TreeHelper'
+import { TreeData, Page } from 'src/lib/models/TreeData'
+import { TreeHelper } from 'src/lib/helpers/TreeHelper'
 import styles from 'src/lib/Tree.module.scss'
 import TreeItemList from 'src/lib/components/TreeItemList/TreeItemList'
 
-interface IProps {
-  data?: ITreeData
+interface Props {
+  data?: TreeData
 }
 
-export const Tree = (props: IProps) => {
+export const Tree = (props: Props) => {
   const [tree, setTree] = useState<TreeHelper>()
   const [pages, setPages] = useState<Page[]>()
-  const [highlightURL, setHighlight] = useState<string>(
+  const [currentURL, setCurrentURL] = useState<string>(
     `${window.location.pathname}${window.location.hash}`
   )
 
@@ -23,18 +23,9 @@ export const Tree = (props: IProps) => {
     }
   }, [props.data])
 
-  const selectPage = (page: Page) => {
-    setHighlight(`/${page.url}`)
-    window.history.pushState(page, page.title, page.url)
-  }
-
-  const selectAnchor = (page: Page, anchor: Anchor) => {
-    setHighlight(`/${anchor.url}${anchor.anchor}`)
-    window.history.pushState(
-      anchor,
-      anchor.title,
-      `${anchor.url}${anchor.anchor}`
-    )
+  const selectPage = (url: string) => {
+    setCurrentURL(url)
+    window.history.pushState({}, '', url)
   }
 
   return (
@@ -42,10 +33,9 @@ export const Tree = (props: IProps) => {
       <ul className={styles.treeList}>
         {pages && tree ? (
           <TreeItemList
-            highlighted={highlightURL}
+            currentURL={currentURL}
             pages={pages}
             tree={tree}
-            selectAnchor={selectAnchor}
             selectPage={selectPage}
           />
         ) : (
