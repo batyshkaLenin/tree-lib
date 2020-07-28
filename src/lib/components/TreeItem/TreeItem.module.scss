@@ -6,8 +6,13 @@
   line-height: 19px;
   letter-spacing: -0.1px;
   color: #343434;
+  transition: font-weight 0.1s ease-in-out;
   &Selected {
     font-weight: bold;
+  }
+  &:hover {
+    cursor: pointer;
+    text-decoration-line: underline;
   }
 }
 
@@ -16,11 +21,23 @@
   align-items: baseline;
   padding-left: 20px;
   &Selected {
+    transition: background 0.2s linear 0s;
     background: #f0f0f0;
   }
 }
 
-.title:hover {
-  cursor: pointer;
-  text-decoration-line: underline;
+.subTree {
+  max-height: 0;
+  padding-left: 0;
+  margin: 0;
+  text-indent: 0;
+  list-style-type: none;
+  transform: scaleY(0);
+  transform-origin: 50% 0;
+  transition: max-height 1s ease-out;
+  &Opened {
+    max-height: inherit;
+    transform: scaleY(1);
+    transition: max-height 1s ease-in-out;
+  }
 }

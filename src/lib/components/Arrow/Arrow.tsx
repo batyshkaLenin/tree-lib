@@ -1,7 +1,7 @@
 import React from 'react'
-import { ReactComponent as ArrowUp } from './ArrowUp.svg'
-import { ReactComponent as ArrowDown } from './ArrowDown.svg'
+import { ReactComponent as ArrowPicture } from './Arrow.svg'
 import styles from './Arrow.module.scss'
+import classNames from 'classnames'
 
 export enum Direction {
   UP,
@@ -14,8 +14,13 @@ interface IProps {
 
 const Arrow = (props: IProps) => {
   return (
-    <div className={styles.arrow}>
-      {props.dir === Direction.UP ? <ArrowUp /> : <ArrowDown />}
+    <div
+      className={classNames(
+        styles.arrow,
+        styles[`arrow${Direction[props.dir]}`]
+      )}
+    >
+      <ArrowPicture />
     </div>
   )
 }

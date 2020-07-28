@@ -81,7 +81,7 @@ export class TreeHelper {
 
   private clearSelect = (): void => {
     const pages = Object.values(this.data.entities.pages).filter(
-      ({ isShow }) => isShow
+      ({ isSelect }) => isSelect
     )
     pages.forEach(({ id }) => {
       this.setPage(id, 'isSelect', false)

@@ -42,35 +42,39 @@ const TreeItem = ({ page, tree, selectPage, selectAnchor }: IProps) => {
           {page.title}
         </p>
       </li>
-      {isShow && (
-        <TreeItemList
-          pages={tree.getChildren(page)}
-          tree={tree}
-          selectPage={selectPage}
-          selectAnchor={selectAnchor}
-        />
-      )}
-      {isShow &&
-        tree?.getAnchors(page).map((anchor, key) => (
-          <li
-            key={key}
-            className={classNames(
-              styles.item,
-              anchor.isSelect && styles.itemSelected
-            )}
-            style={{ paddingLeft: `${(page.level + 1) * 26.45}px` }}
-            onClick={() => selectAnchor(page, anchor)}
-          >
-            <p
+      <ul
+        className={classNames(styles.subTree, isShow && styles.subTreeOpened)}
+      >
+        {isShow && (
+          <TreeItemList
+            pages={tree.getChildren(page)}
+            tree={tree}
+            selectPage={selectPage}
+            selectAnchor={selectAnchor}
+          />
+        )}
+        {isShow &&
+          tree?.getAnchors(page).map((anchor, key) => (
+            <li
+              key={key}
               className={classNames(
-                styles.title,
-                anchor.isSelect && styles.titleSelected
+                styles.item,
+                anchor.isSelect && styles.itemSelected
               )}
+              style={{ paddingLeft: `${(page.level + 1) * 26.45}px` }}
+              onClick={() => selectAnchor(page, anchor)}
             >
-              {anchor.title}
-            </p>
-          </li>
-        ))}
+              <p
+                className={classNames(
+                  styles.title,
+                  anchor.isSelect && styles.titleSelected
+                )}
+              >
+                {anchor.title}
+              </p>
+            </li>
+          ))}
+      </ul>
     </>
   )
 }

@@ -1,3 +1,11 @@
 .arrow {
   margin-right: 8px;
+  &UP {
+    padding-bottom: 8px;
+    transform: rotate(180deg);
+    transition: transform 0.1s;
+  }
+  &DOWN {
+    transition: transform 0.1s;
+  }
 }
