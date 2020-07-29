@@ -23,7 +23,7 @@ const TreeItemAnchor = ({
   return (
     <li
       className={classNames(styles.item, highlight && styles.itemSelected)}
-      style={{ paddingLeft: `${(page.level + anchor.level + 1) * 26.45}px` }}
+      style={{ paddingLeft: `${(page.level + anchor.level + 1) * 36}px` }}
     >
       <p
         className={classNames(

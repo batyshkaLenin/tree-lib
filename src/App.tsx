@@ -11,7 +11,7 @@ function App() {
 
   useEffect(() => {
     axios.get('testData.json').then((res) => {
-      setTree(res.data)
+      // Timeout for demo skeleton-loader
       setTimeout(() => setTree(res.data), 1)
     })
   }, [])
