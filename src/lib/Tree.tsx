@@ -2,7 +2,7 @@ import React, { FunctionComponent, useEffect, useState } from 'react'
 import { TreeData, Page } from 'src/lib/models/TreeData'
 import { TreeHelper } from 'src/lib/helpers/TreeHelper'
 import styles from 'src/lib/Tree.module.scss'
-import TreeItemList from 'src/lib/components/TreeItemList/TreeItemList'
+import TreeNodeList from 'src/lib/components/TreeNodeList/TreeNodeList'
 import Loader from './components/Loader/Loader'
 
 /*
@@ -46,8 +46,8 @@ export const Tree: FunctionComponent<Props> = (props: Props) => {
     <nav className={styles.tree}>
       <ul className={styles.treeList}>
         {pages && tree ? (
-          <TreeItemList
-            currentURL={props.defaultActive}
+          <TreeNodeList
+            currentId={props.defaultActive}
             pages={pages}
             tree={tree}
             selectPage={props.onSelect}

@@ -2,23 +2,23 @@ import React, { useState } from 'react'
 import { TreeHelper } from 'src/lib/helpers/TreeHelper'
 import { Page } from 'src/lib/models/TreeData'
 import Arrow, { Direction } from 'src/lib/components/Arrow/Arrow'
-import styles from './TreeItem.module.scss'
+import styles from './TreeNode.module.scss'
 import classNames from 'classnames'
-import TreeItemList from 'src/lib/components/TreeItemList/TreeItemList'
-import TreeItemAnchor from '../TreeItemAnchor/TreeItemAnchor'
+import TreeNodeList from 'src/lib/components/TreeNodeList/TreeNodeList'
+import TreeNodeAnchor from './TreeNodeAnchor'
 
 interface Props {
   page: Page
-  currentURL: string
+  currentId: string
   tree: TreeHelper
   selectPage: (page: string) => void
 }
 
-const TreeItem = ({ page, tree, selectPage, currentURL }: Props) => {
+const TreeNode = ({ page, tree, selectPage, currentId }: Props) => {
   const [show, setShow] = useState<boolean>()
 
   const url = page.url ? `/${page.url}` : ''
-  const highlight = page.url ? currentURL.includes(url) : false
+  const highlight = page.url ? currentId.includes(url) : false
   const hasChildren = page.pages?.length || page.anchors?.length
 
   const showTree = () => setShow((prevState) => !prevState)
@@ -39,7 +39,7 @@ const TreeItem = ({ page, tree, selectPage, currentURL }: Props) => {
         <p
           className={classNames(
             styles.title,
-            url === currentURL && styles.titleSelected
+            url === currentId && styles.titleSelected
           )}
         >
           <button
@@ -64,9 +64,9 @@ const TreeItem = ({ page, tree, selectPage, currentURL }: Props) => {
           tree
             ?.getAnchors(page.id)
             .map((anchor, key) => (
-              <TreeItemAnchor
+              <TreeNodeAnchor
                 selectPage={selectPage}
-                currentURL={currentURL}
+                currentId={currentId}
                 page={page}
                 anchor={anchor}
                 key={key}
@@ -74,8 +74,8 @@ const TreeItem = ({ page, tree, selectPage, currentURL }: Props) => {
               />
             ))}
         {show && (
-          <TreeItemList
-            currentURL={currentURL}
+          <TreeNodeList
+            currentId={currentId}
             pages={tree.getChildren(page.id)}
             tree={tree}
             selectPage={selectPage}
@@ -86,4 +86,4 @@ const TreeItem = ({ page, tree, selectPage, currentURL }: Props) => {
   )
 }
 
-export default TreeItem
+export default TreeNode

@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import styles from '../TreeItem/TreeItem.module.scss'
+import styles from './TreeNode.module.scss'
 import React from 'react'
 import { Anchor, Page } from '../../models/TreeData'
 
@@ -7,15 +7,15 @@ interface Props {
   page: Page
   anchor: Anchor
   highlight: boolean
-  currentURL: string
+  currentId: string
   selectPage: (url: string) => void
 }
 
-const TreeItemAnchor = ({
+const TreeNodeAnchor = ({
   page,
   anchor,
   highlight,
-  currentURL,
+  currentId,
   selectPage,
 }: Props) => {
   const url = `/${anchor.url}${anchor.anchor}`
@@ -23,12 +23,16 @@ const TreeItemAnchor = ({
   return (
     <li
       className={classNames(styles.item, highlight && styles.itemSelected)}
-      style={{ paddingLeft: `${(page.level + anchor.level + 1) * 36}px` }}
+      style={{
+        paddingLeft: `${
+          (page.level * 26.45 || 20) + (anchor.level * 16.55 || 16.55)
+        }px`,
+      }}
     >
       <p
         className={classNames(
           styles.title,
-          url === currentURL && styles.titleSelected
+          url === currentId && styles.titleSelected
         )}
       >
         <button
@@ -44,4 +48,4 @@ const TreeItemAnchor = ({
   )
 }
 
-export default TreeItemAnchor
+export default TreeNodeAnchor

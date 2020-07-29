@@ -5,7 +5,7 @@ import { Tree } from 'src/lib/Tree'
 
 function App() {
   const [tree, setTree] = useState<TreeData>()
-  const [currentURL, setCurrentURL] = useState<string>(
+  const [currentId, setCurrentId] = useState<string>(
     `${window.location.pathname}${window.location.hash}`
   )
 
@@ -16,14 +16,14 @@ function App() {
     })
   }, [])
 
-  const selectPage = (url: string) => {
-    setCurrentURL(url)
-    window.history.pushState({}, '', url)
+  const selectPage = (id: string) => {
+    setCurrentId(id)
+    window.history.pushState({}, '', id)
   }
 
   return (
     <div>
-      <Tree data={tree} defaultActive={currentURL} onSelect={selectPage} />
+      <Tree data={tree} defaultActive={currentId} onSelect={selectPage} />
     </div>
   )
 }
