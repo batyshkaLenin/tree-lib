@@ -9,19 +9,21 @@ export enum Direction {
 }
 
 interface Props {
+  onClick: () => void
   dir: Direction.UP | Direction.DOWN
 }
 
 const Arrow = (props: Props) => {
   return (
-    <div
+    <button
+      onClick={props.onClick}
       className={classNames(
         styles.arrow,
         styles[`arrow${Direction[props.dir]}`]
       )}
     >
       <ArrowPicture />
-    </div>
+    </button>
   )
 }
 

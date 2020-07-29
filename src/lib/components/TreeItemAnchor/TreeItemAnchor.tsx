@@ -23,8 +23,7 @@ const TreeItemAnchor = ({
   return (
     <li
       className={classNames(styles.item, highlight && styles.itemSelected)}
-      style={{ paddingLeft: `${(page.level + 1) * 26.45}px` }}
-      onClick={() => selectPage(url)}
+      style={{ paddingLeft: `${(page.level + anchor.level + 1) * 26.45}px` }}
     >
       <p
         className={classNames(
@@ -32,7 +31,14 @@ const TreeItemAnchor = ({
           url === currentURL && styles.titleSelected
         )}
       >
-        {anchor.title}
+        <button
+          className={styles.titleLink}
+          tabIndex={0}
+          role="link"
+          onClick={() => selectPage(url)}
+        >
+          {anchor.title}
+        </button>
       </p>
     </li>
   )

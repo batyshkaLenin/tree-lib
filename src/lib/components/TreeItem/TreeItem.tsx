@@ -16,9 +16,12 @@ interface Props {
 
 const TreeItem = ({ page, tree, selectPage, currentURL }: Props) => {
   const [show, setShow] = useState<boolean>()
-  const url = `/${page.url}`
+
+  const url = page.url ? `/${page.url}` : ''
   const highlight = page.url ? currentURL.includes(url) : false
   const hasChildren = page.pages?.length || page.anchors?.length
+
+  const showTree = () => setShow((prevState) => !prevState)
 
   return (
     <>
@@ -28,9 +31,9 @@ const TreeItem = ({ page, tree, selectPage, currentURL }: Props) => {
       >
         {hasChildren ? (
           show ? (
-            <Arrow dir={Direction.UP} />
+            <Arrow dir={Direction.UP} onClick={showTree} />
           ) : (
-            <Arrow dir={Direction.DOWN} />
+            <Arrow dir={Direction.DOWN} onClick={showTree} />
           )
         ) : null}
         <p
@@ -38,26 +41,28 @@ const TreeItem = ({ page, tree, selectPage, currentURL }: Props) => {
             styles.title,
             url === currentURL && styles.titleSelected
           )}
-          onClick={() => {
-            setShow((prevState) => !prevState)
-            selectPage(url)
-          }}
         >
-          {page.title}
+          <button
+            className={styles.titleLink}
+            tabIndex={0}
+            role="link"
+            onClick={() => {
+              if (page.url) {
+                showTree()
+                selectPage(url)
+              } else {
+                showTree()
+              }
+            }}
+          >
+            {page.title}
+          </button>
         </p>
       </li>
       <ul className={classNames(styles.subTree, show && styles.subTreeOpened)}>
-        {show && (
-          <TreeItemList
-            currentURL={currentURL}
-            pages={tree.getChildren(page)}
-            tree={tree}
-            selectPage={selectPage}
-          />
-        )}
         {show &&
           tree
-            ?.getAnchors(page)
+            ?.getAnchors(page.id)
             .map((anchor, key) => (
               <TreeItemAnchor
                 selectPage={selectPage}
@@ -68,6 +73,14 @@ const TreeItem = ({ page, tree, selectPage, currentURL }: Props) => {
                 highlight={highlight}
               />
             ))}
+        {show && (
+          <TreeItemList
+            currentURL={currentURL}
+            pages={tree.getChildren(page.id)}
+            tree={tree}
+            selectPage={selectPage}
+          />
+        )}
       </ul>
     </>
   )

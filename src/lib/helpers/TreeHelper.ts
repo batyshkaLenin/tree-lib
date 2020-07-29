@@ -10,24 +10,24 @@ export class TreeHelper {
   /*
    * Get page children
    * @description Filters all pages where the parentId is equal to the page id
-   * @param {Page} page - the page by which we will search for pages
+   * @param {string} id - the page id by which we will search for pages
    * @returns {Page[]} - array of pages
    */
-  public getChildren = (page: Page): Page[] => {
+  public getChildren = (id: string): Page[] => {
     return Object.values(this.data.entities.pages).filter(
-      (i) => i.parentId === page.id
+      ({ parentId }) => parentId === id
     )
   }
 
   /*
    * Get all anchors by page
    * @description Filters all anchors where the parentId is equal to the page id
-   * @param {Page} page - the page by which we will search for anchors
+   * @param {string} id - the page id by which we will search for anchors
    * @returns {Anchor[]} - array of anchors
    */
-  public getAnchors = (page: Page): Anchor[] => {
+  public getAnchors = (id: string): Anchor[] => {
     return Object.values(this.data.entities.anchors).filter(
-      (i) => i.parentId === page.id
+      ({ parentId }) => parentId === id
     )
   }
 

@@ -9,12 +9,20 @@
   transition: font-weight 0.1s ease-in-out;
   margin-top: 6px;
   margin-bottom: 6px;
+  &Link {
+    cursor: pointer;
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    text-align: initial;
+    &:hover {
+      text-decoration-line: underline;
+    }
+  }
   &Selected {
     font-weight: bold;
-  }
-  &:hover {
-    cursor: pointer;
-    text-decoration-line: underline;
   }
 }
 
@@ -22,6 +30,7 @@
   display: flex;
   align-items: baseline;
   padding-left: 20px;
+  cursor: pointer;
   &Selected {
     transition: background 0.2s linear 0s;
     background: #f0f0f0;

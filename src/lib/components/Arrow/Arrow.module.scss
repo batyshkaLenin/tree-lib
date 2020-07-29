@@ -1,7 +1,12 @@
 .arrow {
   margin-right: 8px;
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
   &UP {
-    padding-bottom: 8px;
+    padding-bottom: 4px;
     transform: rotate(180deg);
     transition: transform 0.1s;
   }

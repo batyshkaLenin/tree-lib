@@ -7,14 +7,13 @@ import Loader from './components/Loader/Loader'
 
 interface Props {
   data?: TreeData
+  onSelect: (url: string) => void
+  defaultActive: string
 }
 
 export const Tree = (props: Props) => {
   const [tree, setTree] = useState<TreeHelper>()
   const [pages, setPages] = useState<Page[]>()
-  const [currentURL, setCurrentURL] = useState<string>(
-    `${window.location.pathname}${window.location.hash}`
-  )
 
   useEffect(() => {
     if (props.data) {
@@ -24,20 +23,15 @@ export const Tree = (props: Props) => {
     }
   }, [props.data])
 
-  const selectPage = (url: string) => {
-    setCurrentURL(url)
-    window.history.pushState({}, '', url)
-  }
-
   return (
     <nav className={styles.tree}>
       <ul className={styles.treeList}>
         {pages && tree ? (
           <TreeItemList
-            currentURL={currentURL}
+            currentURL={props.defaultActive}
             pages={pages}
             tree={tree}
-            selectPage={selectPage}
+            selectPage={props.onSelect}
           />
         ) : (
           <Loader />
