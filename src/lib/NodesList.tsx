@@ -1,20 +1,20 @@
-import { Page } from '../../models/TreeData'
-import TreeNode from '../TreeNode/TreeNode'
+import { TPage } from './types'
+import Node from './Node'
 import React from 'react'
-import { TreeHelper } from '../../helpers/TreeHelper'
+import { TreeHelper } from './utils'
 
 interface Props {
-  pages: Page[]
+  pages: TPage[]
   currentId: string
   tree: TreeHelper
   selectPage: (url: string) => void
 }
 
-const TreeNodeList = ({ pages, tree, selectPage, currentId }: Props) => {
+const NodesList = ({ pages, tree, selectPage, currentId }: Props) => {
   return (
     <>
       {pages.map((i, key) => (
-        <TreeNode
+        <Node
           currentId={currentId}
           page={i}
           selectPage={selectPage}
@@ -26,4 +26,4 @@ const TreeNodeList = ({ pages, tree, selectPage, currentId }: Props) => {
   )
 }
 
-export default TreeNodeList
+export default NodesList

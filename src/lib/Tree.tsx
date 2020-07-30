@@ -1,38 +1,38 @@
-import React, { FunctionComponent, useEffect, useState } from 'react'
-import { TreeData, Page } from 'src/lib/models/TreeData'
-import { TreeHelper } from 'src/lib/helpers/TreeHelper'
-import styles from 'src/lib/Tree.module.scss'
-import TreeNodeList from 'src/lib/components/TreeNodeList/TreeNodeList'
-import Loader from './components/Loader/Loader'
+import React, { useEffect, useState } from 'react'
+import { TreeData, TPage } from './types'
+import { TreeHelper } from './utils'
+import styles from './styles.module.scss'
+import NodesList from 'src/lib/NodesList'
+import Loader from './Loader'
 
 /*
  * @typedef {Object} Props
- * @property {TreeData|undefined} data
+ * @property {Types|undefined} data
  * @property {function} onSelect
- * @property {string} defaultActive
+ * @property {string} active
  */
 interface Props {
   data?: TreeData
-  onSelect: (url: string) => void
-  defaultActive: string
+  onSelect: (id: string) => void
+  active: string
 }
 
 /*
  * Tree menu component
  * @component
  * @param {Props} props
- * @returns {FunctionComponent<Props>}
+ * @returns {React.FC<Props>}
  * @example
- * const treeData = {} as TreeData
- * const onSelect = (url: string) => console.log(url)
- * const defaultActive = '/'
+ * const treeData = {} as Types
+ * const onSelect = (id: string) => console.log(id)
+ * const active = 'top'
  * return (
- *   <Tree data={treeData} defaultActive={defaultActive} onSelect={onSelect} />
+ *   <Tree data={treeData} active={active} onSelect={onSelect} />
  * )
  */
-export const Tree: FunctionComponent<Props> = (props: Props) => {
+export const Tree: React.FC<Props> = (props: Props) => {
   const [tree, setTree] = useState<TreeHelper>()
-  const [pages, setPages] = useState<Page[]>()
+  const [pages, setPages] = useState<TPage[]>()
 
   useEffect(() => {
     if (props.data) {
@@ -43,11 +43,11 @@ export const Tree: FunctionComponent<Props> = (props: Props) => {
   }, [props.data])
 
   return (
-    <nav className={styles.tree}>
+    <nav className={styles.nav}>
       <ul className={styles.treeList}>
         {pages && tree ? (
-          <TreeNodeList
-            currentId={props.defaultActive}
+          <NodesList
+            currentId={props.active}
             pages={pages}
             tree={tree}
             selectPage={props.onSelect}

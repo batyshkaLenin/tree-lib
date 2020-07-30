@@ -1,4 +1,4 @@
-export interface Page {
+export type TPage = {
   id: string
   title: string
   disqus_id: string
@@ -11,7 +11,7 @@ export interface Page {
   selectFirstChildOnClick?: boolean
 }
 
-export interface Anchor {
+export type TAnchor = {
   parentId: string
   level: number
   id: string
@@ -21,16 +21,16 @@ export interface Anchor {
   url: string
 }
 
-export interface Entities {
+export type TEntities = {
   pages: {
-    [key: string]: Page
+    [key: string]: TPage
   }
   anchors: {
-    [key: string]: Anchor
+    [key: string]: TAnchor
   }
 }
 
-export interface TreeData {
-  entities: Entities
+export type TreeData = {
+  entities: TEntities
   topLevelIds: string[]
 }
