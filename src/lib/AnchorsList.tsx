@@ -7,13 +7,21 @@ interface Props {
   page: TPage
   currentId: string
   selectPage: (id: string) => void
+  highlight: boolean
 }
 
-const AnchorsList = ({ page, anchors, selectPage, currentId }: Props) => {
+const AnchorsList = ({
+  highlight,
+  page,
+  anchors,
+  selectPage,
+  currentId,
+}: Props) => {
   return (
     <>
       {anchors.map((i, key) => (
         <Anchor
+          highlight={highlight}
           anchor={i}
           currentId={currentId}
           page={page}

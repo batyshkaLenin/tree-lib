@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import { TreeHelper } from './utils'
 import { TPage } from './types'
 import ExpandButton from './ExpandButton'
@@ -15,29 +15,36 @@ interface Props {
 }
 
 const Node = ({ page, tree, selectPage, currentId }: Props) => {
-  const [show, setShow] = useState<boolean>(
-    !!tree.getParents(currentId).filter((i) => i.id === page.id).length
+  const showMountedNode = useMemo(
+    () => !!tree.getParents(currentId).filter((i) => i.id === page.id).length,
+    [tree, currentId, page]
   )
+  const [show, setShow] = useState<boolean>(showMountedNode)
 
-  const selected = currentId === page.id
-  const highlight = selected ? selected : currentId.includes(page.id)
-  const hasChildren = page.pages?.length
+  const selected = useMemo(() => currentId === page.id, [currentId, page])
+  const highlight = useMemo(
+    () => (selected ? selected : currentId.includes(page.id)),
+    [selected, page, currentId]
+  )
+  const hasChildren = useMemo(() => page.pages?.length, [page])
 
   const showTree = () => setShow((prevState) => !prevState)
+  const onClickLink = useCallback((e) => e.preventDefault(), [])
+  const onClickNode = useCallback(() => {
+    if (page.url) {
+      showTree()
+      selectPage(page.id)
+    } else {
+      showTree()
+    }
+  }, [page, selectPage])
 
   return (
     <>
       <li
         className={classNames(styles.item, highlight && styles.itemSelected)}
         style={{ paddingLeft: `${page.level * 26.45 || 20}px` }}
-        onClick={() => {
-          if (page.url) {
-            showTree()
-            selectPage(page.id)
-          } else {
-            showTree()
-          }
-        }}
+        onClick={onClickNode}
       >
         {hasChildren ? <ExpandButton expand={show} onClick={showTree} /> : null}
         <div
@@ -48,7 +55,7 @@ const Node = ({ page, tree, selectPage, currentId }: Props) => {
               className={styles.titleLink}
               tabIndex={0}
               href={page.url}
-              onClick={(e) => e.preventDefault()}
+              onClick={onClickLink}
             >
               {page.title}
             </a>
@@ -60,6 +67,7 @@ const Node = ({ page, tree, selectPage, currentId }: Props) => {
       <ul className={classNames(styles.subTree, show && styles.subTreeOpened)}>
         {show && (
           <AnchorsList
+            highlight={highlight}
             anchors={tree.getAnchors(page.id)}
             page={page}
             currentId={currentId}

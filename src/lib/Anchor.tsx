@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import styles from './styles.module.scss'
-import React from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { TAnchor, TPage } from './types'
 
 interface Props {
@@ -8,12 +8,17 @@ interface Props {
   anchor: TAnchor
   currentId: string
   selectPage: (url: string) => void
+  highlight: boolean
 }
 
-const Anchor = ({ page, anchor, currentId, selectPage }: Props) => {
-  const selected = anchor.id === currentId
-  const highlight =
-    currentId === page.id ? currentId === page.id : currentId.includes(page.id)
+const Anchor = ({ highlight, page, anchor, currentId, selectPage }: Props) => {
+  const url = useMemo(() => `${anchor.url}${anchor.anchor}`, [anchor])
+  const selected = useMemo(() => anchor.id === currentId, [anchor, currentId])
+  const onClickAnchor = useCallback(() => selectPage(anchor.id), [
+    selectPage,
+    anchor,
+  ])
+  const onClickLink = useCallback((e) => e.preventDefault(), [])
 
   return (
     <li
@@ -23,7 +28,7 @@ const Anchor = ({ page, anchor, currentId, selectPage }: Props) => {
           (page.level * 26.45 || 20) + (anchor.level * 16.55 || 16.55)
         }px`,
       }}
-      onClick={() => selectPage(anchor.id)}
+      onClick={onClickAnchor}
     >
       <div
         className={classNames(styles.title, selected && styles.titleSelected)}
@@ -31,8 +36,8 @@ const Anchor = ({ page, anchor, currentId, selectPage }: Props) => {
         <a
           className={styles.titleLink}
           tabIndex={0}
-          href={`${anchor.url}${anchor.anchor}`}
-          onClick={(e) => e.preventDefault()}
+          href={url}
+          onClick={onClickLink}
         >
           {anchor.title}
         </a>
