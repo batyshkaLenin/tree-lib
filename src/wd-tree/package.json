@@ -8,9 +8,6 @@
   "name": "wd-tree",
   "author": "batyshkaLenin",
   "module": "index.ts",
-  "scripts": {
-    "postinstall": "./node_modules/.bin/local-link"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/batyshkaLenin/tree-lib.git"
