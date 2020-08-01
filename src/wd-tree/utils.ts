@@ -83,6 +83,30 @@ export class TreeHelper {
     }
   }
 
+  public getPageAdditionalData = (
+    currentId: string,
+    page: TPage
+  ): {
+    selected: boolean
+    highlight: boolean
+    hasChildren: boolean
+    shown: boolean
+  } => {
+    const selected = currentId === page.id
+    return {
+      selected,
+      highlight: selected
+        ? selected
+        : this.data.entities.pages[currentId]
+        ? false
+        : currentId.includes(page.id),
+      hasChildren: !!page.pages?.length,
+      shown:
+        this.getParents(currentId).filter((item) => item.id === page.id)
+          .length > 0,
+    }
+  }
+
   /*
    * Get page anchors
    * @public

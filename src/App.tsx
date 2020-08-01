@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Tree, TreeType, getIdByURL } from 'src/lib'
+import { Tree, TreeType, getIdByURL } from 'wd-tree'
 
 function App() {
   const [tree, setTree] = useState<TreeType>()
@@ -12,7 +12,7 @@ function App() {
       setTimeout(() => {
         setTree(res.data)
         setCurrentId(getIdByURL(res.data) || '')
-      }, 1000)
+      }, 200)
     })
   }, [])
 
@@ -29,9 +29,9 @@ function App() {
   }
 
   return (
-    <div>
+    <>
       <Tree data={tree} active={currentId} onSelect={selectPage} />
-    </div>
+    </>
   )
 }
 

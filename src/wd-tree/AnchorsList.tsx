@@ -1,11 +1,12 @@
 import { TAnchor, TPage } from './types'
 import React from 'react'
 import Anchor from './Anchor'
+import styles from './styles.module.scss'
 
 interface Props {
   anchors: TAnchor[]
   page: TPage
-  currentId: string
+  active: string
   selectPage: (id: string) => void
   highlight: boolean
 }
@@ -15,21 +16,23 @@ const AnchorsList = ({
   page,
   anchors,
   selectPage,
-  currentId,
+  active,
 }: Props) => {
-  return (
-    <>
+  return anchors.length ? (
+    <ul className={styles.treeAnchorsList}>
       {anchors.map((i, key) => (
         <Anchor
           highlight={highlight}
           anchor={i}
-          currentId={currentId}
+          active={active}
           page={page}
           selectPage={selectPage}
           key={key}
         />
       ))}
-    </>
+    </ul>
+  ) : (
+    <></>
   )
 }
 

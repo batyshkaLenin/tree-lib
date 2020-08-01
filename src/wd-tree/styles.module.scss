@@ -1,0 +1,532 @@
+@-webkit-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.root {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 310px;
+  background: #fafafa;
+  transition: left 0.2s, width 0.2s;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.loader {
+  opacity: 0;
+  padding: 30px 0 10px 13px;
+  transition: opacity 0.2s ease-in;
+  &Visible {
+    opacity: 1;
+    .loaderLine {
+      -webkit-animation: fade-in 0.2s ease-out 0.1s forwards;
+      animation: fade-in 0.2s ease-out 0.1s forwards;
+    }
+    .loaderLine2 {
+      -webkit-animation-duration: 0.3s;
+      animation-duration: 0.3s;
+    }
+    .loaderLine3 {
+      -webkit-animation-duration: 0.5s;
+      animation-duration: 0.5s;
+    }
+    .loaderLine4 {
+      -webkit-animation-duration: 1s;
+      animation-duration: 1s;
+    }
+  }
+  &Line {
+    opacity: 0;
+    width: 201px;
+    height: 13px;
+    margin-bottom: 28px;
+    margin-left: 23px;
+    background: #e6e6e6;
+    &1 {
+      margin-left: 0;
+    }
+    &3 {
+      width: 178px;
+    }
+  }
+}
+
+.tree {
+  padding: 30px 0 10px;
+  font-family: Open Sans, Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 17px;
+  margin: 0;
+  border: 0;
+  vertical-align: baseline;
+  list-style: none;
+  &Node {
+    &Level0 {
+      .treeTitle {
+        padding-left: 26px;
+      }
+      .treeAnchor {
+        .treeTitle {
+          padding-left: 46px;
+        }
+        .treeAnchorTitleLevel1 {
+          padding-left: 66px;
+        }
+        .treeAnchorTitleLevel2 {
+          padding-left: 86px;
+        }
+        .treeAnchorTitleLevel3 {
+          padding-left: 106px;
+        }
+        .treeAnchorTitleLevel4 {
+          padding-left: 126px;
+        }
+        .treeAnchorTitleLevel5 {
+          padding-left: 146px;
+        }
+      }
+      .treeExpander {
+        left: 3px;
+      }
+    }
+    &Level1 {
+      .treeTitle {
+        padding-left: 46px;
+      }
+      .treeAnchor {
+        .treeTitle {
+          padding-left: 66px;
+        }
+        .treeAnchorTitleLevel1 {
+          padding-left: 86px;
+        }
+        .treeAnchorTitleLevel2 {
+          padding-left: 106px;
+        }
+        .treeAnchorTitleLevel3 {
+          padding-left: 126px;
+        }
+        .treeAnchorTitleLevel4 {
+          padding-left: 146px;
+        }
+        .treeAnchorTitleLevel5 {
+          padding-left: 166px;
+        }
+      }
+      .treeExpander {
+        left: 23px;
+      }
+    }
+    &Level2 {
+      .treeTitle {
+        padding-left: 66px;
+      }
+      .treeAnchor {
+        .treeTitle {
+          padding-left: 86px;
+        }
+        .treeAnchorTitleLevel1 {
+          padding-left: 106px;
+        }
+        .treeAnchorTitleLevel2 {
+          padding-left: 126px;
+        }
+        .treeAnchorTitleLevel3 {
+          padding-left: 146px;
+        }
+        .treeAnchorTitleLevel4 {
+          padding-left: 166px;
+        }
+        .treeAnchorTitleLevel5 {
+          padding-left: 186px;
+        }
+      }
+      .treeExpander {
+        left: 43px;
+      }
+    }
+    &Level3 {
+      .treeTitle {
+        padding-left: 86px;
+      }
+      .treeAnchor {
+        .treeTitle {
+          padding-left: 106px;
+        }
+        .treeAnchorTitleLevel1 {
+          padding-left: 126px;
+        }
+        .treeAnchorTitleLevel2 {
+          padding-left: 146px;
+        }
+        .treeAnchorTitleLevel3 {
+          padding-left: 166px;
+        }
+        .treeAnchorTitleLevel4 {
+          padding-left: 186px;
+        }
+        .treeAnchorTitleLevel5 {
+          padding-left: 206px;
+        }
+      }
+      .treeExpander {
+        left: 63px;
+      }
+    }
+    &Level4 {
+      .treeTitle {
+        padding-left: 106px;
+      }
+      .treeAnchor {
+        .treeTitle {
+          padding-left: 126px;
+        }
+        .treeAnchorTitleLevel1 {
+          padding-left: 146px;
+        }
+        .treeAnchorTitleLevel2 {
+          padding-left: 166px;
+        }
+        .treeAnchorTitleLevel3 {
+          padding-left: 186px;
+        }
+        .treeAnchorTitleLevel4 {
+          padding-left: 206px;
+        }
+        .treeAnchorTitleLevel5 {
+          padding-left: 226px;
+        }
+      }
+      .treeExpander {
+        left: 83px;
+      }
+    }
+    &Level5 {
+      .treeTitle {
+        padding-left: 126px;
+      }
+      .treeAnchor {
+        .treeTitle {
+          padding-left: 146px;
+        }
+        .treeAnchorTitleLevel1 {
+          padding-left: 166px;
+        }
+        .treeAnchorTitleLevel2 {
+          padding-left: 186px;
+        }
+        .treeAnchorTitleLevel3 {
+          padding-left: 206px;
+        }
+        .treeAnchorTitleLevel4 {
+          padding-left: 226px;
+        }
+        .treeAnchorTitleLevel5 {
+          padding-left: 246px;
+        }
+      }
+      .treeExpander {
+        left: 103px;
+      }
+    }
+    &Level6 {
+      .treeTitle {
+        padding-left: 146px;
+      }
+      .treeAnchor {
+        .treeTitle {
+          padding-left: 166px;
+        }
+        .treeAnchorTitleLevel1 {
+          padding-left: 186px;
+        }
+        .treeAnchorTitleLevel2 {
+          padding-left: 206px;
+        }
+        .treeAnchorTitleLevel3 {
+          padding-left: 226px;
+        }
+        .treeAnchorTitleLevel4 {
+          padding-left: 246px;
+        }
+        .treeAnchorTitleLevel5 {
+          padding-left: 266px;
+        }
+      }
+      .treeExpander {
+        left: 123px;
+      }
+    }
+    &Level7 {
+      .treeTitle {
+        padding-left: 166px;
+      }
+      .treeAnchor {
+        .treeTitle {
+          padding-left: 186px;
+        }
+        .treeAnchorTitleLevel1 {
+          padding-left: 206px;
+        }
+        .treeAnchorTitleLevel2 {
+          padding-left: 226px;
+        }
+        .treeAnchorTitleLevel3 {
+          padding-left: 246px;
+        }
+        .treeAnchorTitleLevel4 {
+          padding-left: 266px;
+        }
+        .treeAnchorTitleLevel5 {
+          padding-left: 286px;
+        }
+      }
+      .treeExpander {
+        left: 143px;
+      }
+    }
+    &Level8 {
+      .treeTitle {
+        padding-left: 186px;
+      }
+      .treeAnchor {
+        .treeTitle {
+          padding-left: 206px;
+        }
+        .treeAnchorTitleLevel1 {
+          padding-left: 226px;
+        }
+        .treeAnchorTitleLevel2 {
+          padding-left: 246px;
+        }
+        .treeAnchorTitleLevel3 {
+          padding-left: 266px;
+        }
+        .treeAnchorTitleLevel4 {
+          padding-left: 286px;
+        }
+        .treeAnchorTitleLevel5 {
+          padding-left: 306px;
+        }
+      }
+      .treeExpander {
+        left: 163px;
+      }
+    }
+    &Level9 {
+      .treeTitle {
+        padding-left: 206px;
+      }
+      .treeAnchor {
+        .treeTitle {
+          padding-left: 226px;
+        }
+        .treeAnchorTitleLevel1 {
+          padding-left: 246px;
+        }
+        .treeAnchorTitleLevel2 {
+          padding-left: 266px;
+        }
+        .treeAnchorTitleLevel3 {
+          padding-left: 286px;
+        }
+        .treeAnchorTitleLevel4 {
+          padding-left: 306px;
+        }
+        .treeAnchorTitleLevel5 {
+          padding-left: 326px;
+        }
+      }
+      .treeExpander {
+        left: 183px;
+      }
+    }
+    &Level10 {
+      .treeTitle {
+        padding-left: 226px;
+      }
+      .treeAnchor {
+        .treeTitle {
+          padding-left: 246px;
+        }
+        .treeAnchorTitleLevel1 {
+          padding-left: 266px;
+        }
+        .treeAnchorTitleLevel2 {
+          padding-left: 286px;
+        }
+        .treeAnchorTitleLevel3 {
+          padding-left: 306px;
+        }
+        .treeAnchorTitleLevel4 {
+          padding-left: 326px;
+        }
+        .treeAnchorTitleLevel5 {
+          padding-left: 346px;
+        }
+      }
+      .treeExpander {
+        left: 203px;
+      }
+    }
+  }
+  &Title {
+    margin: 0;
+    border: 0;
+    list-style: none;
+    vertical-align: baseline;
+    padding: 6px 5px 6px 0;
+    outline: none;
+    cursor: default;
+    color: #343434;
+    font-size: 14px;
+    line-height: 19.25px;
+    &Wrapper {
+      margin: 0;
+      border: 0;
+      vertical-align: baseline;
+      list-style: none;
+      padding: 0;
+      position: relative;
+      &:hover {
+        > .treeTitle {
+          text-decoration: underline;
+        }
+        > .treeTitleSelected {
+          text-decoration: none;
+          &:visited {
+            text-decoration: none;
+          }
+        }
+      }
+    }
+    &Selected {
+      cursor: default;
+      color: #343434;
+      background: #f0f0f0;
+      &:visited {
+        cursor: default;
+        color: #343434;
+        background: #f0f0f0;
+        &:not(.treeTitleChildAnchorSelected) {
+          letter-spacing: -0.55px;
+          font-weight: 700;
+        }
+      }
+      &:not(.treeTitleChildAnchorSelected) {
+        letter-spacing: -0.55px;
+        font-weight: 700;
+      }
+    }
+    &HasChildren {
+      cursor: pointer;
+    }
+    &Link {
+      display: block;
+      cursor: pointer;
+      text-decoration: none;
+      color: #343434;
+      &:visited {
+        display: block;
+        cursor: pointer;
+        text-decoration: none;
+        color: #343434;
+        &:hover {
+          color: #343434;
+        }
+      }
+      &:hover {
+        color: #343434;
+      }
+    }
+  }
+  &AnchorsList {
+    padding: 0 0 12px;
+    background: #f0f0f0;
+    margin: 0;
+    border: 0;
+    vertical-align: baseline;
+    list-style: none;
+  }
+  &NodesList {
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+    margin: 0 0 12px;
+    list-style: none;
+  }
+  &Nav {
+    -webkit-animation: fade-in 0.3s ease-out forwards;
+    animation: fade-in 0.3s ease-out forwards;
+    opacity: 0;
+    overflow-y: auto;
+    -webkit-flex: 1;
+    flex: 1;
+    will-change: transform;
+    -webkit-overflow-scrolling: touch;
+    &:after {
+      display: block;
+      height: 50px;
+      content: '';
+    }
+  }
+  &Expander {
+    margin: 0;
+    border: 0;
+    list-style: none;
+    vertical-align: baseline;
+    position: absolute;
+    top: 0;
+    left: 3px;
+    width: 14px;
+    height: 100%;
+    padding: 0 0 0 10px;
+    cursor: pointer;
+    &Icon {
+      position: absolute;
+      top: 14px;
+      bottom: 0;
+      width: 8px;
+      height: 5px;
+      content: '';
+      color: #343434;
+      transition: transform 0.3s, -webkit-transform 0.3s;
+      &Expanded {
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  .root {
+    width: 300px;
+  }
+}
+@media screen and (max-width: 1300px) {
+  .root {
+    width: 272px;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .root {
+    left: -272px;
+  }
+}

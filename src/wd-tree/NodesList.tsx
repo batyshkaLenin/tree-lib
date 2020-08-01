@@ -2,27 +2,30 @@ import { TPage } from './types'
 import Node from './Node'
 import React from 'react'
 import { TreeHelper } from './utils'
+import styles from './styles.module.scss'
 
 interface Props {
   pages: TPage[]
-  currentId: string
+  active: string
   tree: TreeHelper
   selectPage: (url: string) => void
 }
 
-const NodesList = ({ pages, tree, selectPage, currentId }: Props) => {
-  return (
-    <>
+const NodesList = ({ pages, tree, selectPage, active }: Props) => {
+  return pages.length ? (
+    <ul className={styles.treeNodesList}>
       {pages.map((i, key) => (
         <Node
-          currentId={currentId}
+          active={active}
           page={i}
           selectPage={selectPage}
           tree={tree}
           key={key}
         />
       ))}
-    </>
+    </ul>
+  ) : (
+    <></>
   )
 }
 

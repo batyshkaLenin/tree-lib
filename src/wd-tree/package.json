@@ -1,0 +1,27 @@
+{
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "index.ts",
+  "engines": {
+    "node": ">=10"
+  },
+  "name": "wd-tree",
+  "author": "batyshkaLenin",
+  "module": "index.ts",
+  "scripts": {
+    "postinstall": "./node_modules/.bin/local-link"
+  },
+  "peerDependencies": {
+    "classnames": "^2.2.6",
+    "node-sass": "^4.13.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "typescript": "~3.7.2",
+    "@types/classnames": "^2.2.10",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0"
+  }
+}
