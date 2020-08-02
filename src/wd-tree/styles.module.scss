@@ -425,12 +425,10 @@
         color: #343434;
         background: #f0f0f0;
         &:not(.treeTitleChildAnchorSelected) {
-          letter-spacing: -0.55px;
           font-weight: 700;
         }
       }
       &:not(.treeTitleChildAnchorSelected) {
-        letter-spacing: -0.55px;
         font-weight: 700;
       }
     }
