@@ -20,10 +20,10 @@ const AnchorsList = ({
 }: Props) => {
   return anchors.length ? (
     <ul className={styles.treeAnchorsList}>
-      {anchors.map((i, key) => (
+      {anchors.map((anchor, key) => (
         <Anchor
           highlight={highlight}
-          anchor={i}
+          anchor={anchor}
           active={active}
           page={page}
           selectPage={selectPage}

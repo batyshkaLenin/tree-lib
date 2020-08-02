@@ -14,10 +14,10 @@ interface Props {
 const NodesList = ({ pages, tree, selectPage, active }: Props) => {
   return pages.length ? (
     <ul className={styles.treeNodesList}>
-      {pages.map((i, key) => (
+      {pages.map((page, key) => (
         <Node
           active={active}
-          page={i}
+          page={page}
           selectPage={selectPage}
           tree={tree}
           key={key}

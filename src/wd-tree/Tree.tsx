@@ -24,22 +24,20 @@ interface Props {
  * @param {Props} props
  * @returns {React.FC<Props>}
  * @example
- * import { Tree, TreeType, getIdByURL } from 'wd-tree'
- *
  * const [tree, setTree] = useState<TreeType>()
- * const [active, setActive] = React.useState<string>('')
+ * const [currentId, setCurrentId] = useState<string>('')
+ *
  * useEffect(() => {
- *   axios.get('data.json').then((res) => {
- *     setTree(res.data)
- *     setCurrentId(getIdByURL(res.data) || '')
- *   })
+ *   axios.get('testData.json').then((res) => {
+ *    setTree(res.data)
+ *    setCurrentId(getIdByURL(res.data) || '')
+ *  })
  * }, [])
  *
  * const selectPage = (id: string) => setCurrentId(id)
  *
- * return (
- *   <Tree data={tree} active={active} onSelect={selectPage} />
- * )
+ * return <Tree data={tree} active={currentId} onSelect={selectPage} />
+ * }
  */
 export const Tree: React.FC<Props> = (props: Props) => {
   const [tree, setTree] = useState<TreeHelper>()

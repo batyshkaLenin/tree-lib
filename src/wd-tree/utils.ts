@@ -28,7 +28,7 @@ export class TreeHelper {
    * @returns {TPage[]} array of pages
    */
   public getPagesByIds = (ids: string[]): TPage[] => {
-    return ids.map((id) => this.getPageById(id))
+    return ids.map(id => this.getPageById(id))
   }
 
   /*
@@ -48,7 +48,7 @@ export class TreeHelper {
    * @returns {TAnchor[]} array of anchors
    */
   public getAnchorsByIds = (ids: string[]): TAnchor[] => {
-    return ids.map((id) => this.getAnchorById(id))
+    return ids.map(id => this.getAnchorById(id))
   }
 
   /*
@@ -102,8 +102,8 @@ export class TreeHelper {
         : currentId.includes(page.id),
       hasChildren: !!page.pages?.length,
       shown:
-        this.getParents(currentId).filter((item) => item.id === page.id)
-          .length > 0,
+        this.getParents(currentId).filter(item => item.id === page.id).length >
+        0,
     }
   }
 
@@ -126,7 +126,7 @@ export class TreeHelper {
    * @returns {TPage[]} array of pages
    */
   public getTree = (): TPage[] => {
-    return this.data.topLevelIds.map((key) => this.data.entities.pages[key])
+    return this.data.topLevelIds.map(key => this.data.entities.pages[key])
   }
 }
 
@@ -134,13 +134,13 @@ export const getIdByURL = (data: TreeData): string | undefined => {
   const href = window.location.href
   const lastPathname = href.split('/')[href.split('/').length - 1]
   const anchor = Object.values(data.entities.anchors).filter(
-    (anchor) => `${anchor.url}${anchor.anchor}` === lastPathname
+    anchor => `${anchor.url}${anchor.anchor}` === lastPathname
   )[0]
   if (anchor) {
     return anchor.id
   }
   const page = Object.values(data.entities.pages).filter(
-    (page) => page.url === lastPathname
+    page => page.url === lastPathname
   )[0]
   if (page) {
     return page.id

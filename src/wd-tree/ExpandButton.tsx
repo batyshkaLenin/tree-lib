@@ -10,7 +10,7 @@ interface Props {
 
 const ExpandButton = ({ expand, onClick }: Props) => {
   const expandClick = useCallback(
-    (e) => {
+    e => {
       onClick()
       e.stopPropagation()
     },

@@ -21,10 +21,10 @@ const Node = ({ page, tree, selectPage, active }: Props) => {
   )
   const [expanded, setExpand] = useState<boolean>(shown)
 
-  const changeShow = () => setExpand((prevState) => !prevState)
-  const onClickLink = useCallback((e) => e.preventDefault(), [])
+  const changeShow = () => setExpand(prevState => !prevState)
+  const onClickLink = useCallback(e => e.preventDefault(), [])
   const onClickNode = useCallback(
-    (e) => {
+    e => {
       if (page.url) {
         if (!shown) {
           changeShow()
@@ -38,7 +38,7 @@ const Node = ({ page, tree, selectPage, active }: Props) => {
     [shown, page, selectPage]
   )
   const scrollToCurrent = useCallback(
-    (e) => {
+    e => {
       if (highlight && !expanded && e) {
         e.scrollIntoView({ block: 'center' })
       }

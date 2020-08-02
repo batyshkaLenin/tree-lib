@@ -15,13 +15,13 @@ const Anchor = ({ highlight, anchor, active, selectPage }: Props) => {
   const url = `${anchor.url}${anchor.anchor}`
   const selected = anchor.id === active
   const onClickAnchor = useCallback(
-    (e) => {
+    e => {
       selectPage(anchor.id)
       e.stopPropagation()
     },
     [selectPage, anchor]
   )
-  const onClickLink = useCallback((e) => e.preventDefault(), [])
+  const onClickLink = useCallback(e => e.preventDefault(), [])
 
   return (
     <li className={styles.treeAnchor} onClick={onClickAnchor}>

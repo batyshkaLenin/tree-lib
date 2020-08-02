@@ -21,12 +21,9 @@ function App() {
   const [currentId, setCurrentId] = useState<string>('')
 
   useEffect(() => {
-    axios.get('testData.json').then((res) => {
-      // Timeout for demo skeleton-loader
-      setTimeout(() => {
-        setTree(res.data)
-        setCurrentId(getIdByURL(res.data) || '')
-      }, 200)
+    axios.get('testData.json').then(res => {
+      setTree(res.data)
+      setCurrentId(getIdByURL(res.data) || '')
     })
   }, [])
 
