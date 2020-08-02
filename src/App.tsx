@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 import { Tree, TreeType, getIdByURL } from 'wd-tree'
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
   const [currentId, setCurrentId] = useState<string>('')
 
   useEffect(() => {
-    axios.get('testData.json').then((res) => {
+    axios.get('testData.json').then((res: AxiosResponse<TreeType>) => {
       // Timeout for demo skeleton-loader
       setTimeout(() => {
         setTree(res.data)
@@ -28,11 +28,7 @@ function App() {
     }
   }
 
-  return (
-    <>
-      <Tree data={tree} active={currentId} onSelect={selectPage} />
-    </>
-  )
+  return <Tree data={tree} active={currentId} onSelect={selectPage} />
 }
 
 export default App
