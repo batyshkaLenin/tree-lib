@@ -23,16 +23,20 @@ const Node = ({ page, tree, selectPage, active }: Props) => {
 
   const changeShow = () => setExpand(prevState => !prevState)
   const onClickLink = useCallback(e => e.preventDefault(), [])
-  const onClickNode = useCallback(() => {
-    if (page.url) {
-      if (!shown) {
+  const onClickNode = useCallback(
+    e => {
+      if (page.url) {
+        if (!expanded) {
+          changeShow()
+        }
+        selectPage(page.id)
+      } else {
         changeShow()
       }
-      selectPage(page.id)
-    } else {
-      changeShow()
-    }
-  }, [shown, page, selectPage])
+      e.stopPropagation()
+    },
+    [expanded, page, selectPage]
+  )
   const scrollToCurrent = useCallback(
     e => {
       if (highlight && !expanded && e) {
