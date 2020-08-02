@@ -134,12 +134,16 @@ export const getIdByURL = (data: TreeData): string | undefined => {
   const href = window.location.href
   const lastPathname = href.split('/')[href.split('/').length - 1]
   const anchor = Object.values(data.entities.anchors).filter(
-    (i) => `${i.url}${i.anchor}` === lastPathname
+    (anchor) => `${anchor.url}${anchor.anchor}` === lastPathname
   )[0]
-  if (anchor) return anchor.id
+  if (anchor) {
+    return anchor.id
+  }
   const page = Object.values(data.entities.pages).filter(
-    (i) => i.url === lastPathname
+    (page) => page.url === lastPathname
   )[0]
-  if (page) return page.id
+  if (page) {
+    return page.id
+  }
   return undefined
 }

@@ -19,7 +19,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "lint": "tslint './src/wd-tree/*.{ts,tsx}' -t verbose --project tsconfig.json"
   },
   "eslintConfig": {
     "extends": "react-app"

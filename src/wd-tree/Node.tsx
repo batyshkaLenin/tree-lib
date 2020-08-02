@@ -26,7 +26,9 @@ const Node = ({ page, tree, selectPage, active }: Props) => {
   const onClickNode = useCallback(
     (e) => {
       if (page.url) {
-        if (!shown) changeShow()
+        if (!shown) {
+          changeShow()
+        }
         selectPage(page.id)
       } else {
         changeShow()
@@ -37,7 +39,9 @@ const Node = ({ page, tree, selectPage, active }: Props) => {
   )
   const scrollToCurrent = useCallback(
     (e) => {
-      if (highlight && !expanded) e && e.scrollIntoView({ block: 'center' })
+      if (highlight && !expanded && e) {
+        e.scrollIntoView({ block: 'center' })
+      }
     },
     [highlight, expanded]
   )

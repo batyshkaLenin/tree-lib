@@ -29,6 +29,7 @@
     "array-type": false,
     "forin": false,
     "no-increment-decrement": false,
+    "interface-over-type-literal": false,
     "function-name": [
       true,
       {
