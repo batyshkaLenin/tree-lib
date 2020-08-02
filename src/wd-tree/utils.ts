@@ -140,9 +140,7 @@ export class TreeUtil {
   public getTree = (): TPage[] => {
     return this.data.topLevelIds.map(key => this.data.entities.pages[key])
   }
-}
 
-export class TreeHelper extends TreeUtil {
   /*
    * Get page or anchor by Id
    * @public

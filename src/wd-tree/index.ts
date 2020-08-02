@@ -1,4 +1,4 @@
-import { TreeHelper } from './utils'
+import { TreeUtil as TreeHelper } from './utils'
 import { Tree } from './Tree'
 import { TEntities, TreeData, TAnchor, TPage } from './types'
 
