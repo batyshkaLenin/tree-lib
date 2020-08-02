@@ -1,13 +1,13 @@
 import { TPage } from './types'
 import Node from './Node'
 import React from 'react'
-import { TreeHelper } from './utils'
+import { TreeUtil } from './utils'
 import styles from './styles.module.scss'
 
 interface Props {
   pages: TPage[]
   active: string
-  tree: TreeHelper
+  tree: TreeUtil
   selectPage: (url: string) => void
 }
 

@@ -13,21 +13,27 @@ Basic usage tree component:
 
 ```tsx
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import { Tree, TreeType, getIdByURL } from 'wd-tree'
+import axios, { AxiosResponse } from 'axios'
+import { Tree, TreeType, TreeHelper } from 'wd-tree'
 
 function App() {
   const [tree, setTree] = useState<TreeType>()
   const [currentId, setCurrentId] = useState<string>('')
+  const [helper, setHelper] = useState<TreeHelper>()
 
   useEffect(() => {
-    axios.get('testData.json').then(res => {
+    axios.get('testData.json').then((res: AxiosResponse<TreeType>) => {
       setTree(res.data)
-      setCurrentId(getIdByURL(res.data) || '')
+      const treeHelper = new TreeHelper(res.data)
+      setHelper(treeHelper)
+      setCurrentId(treeHelper.getIdByURL() || '')
     })
   }, [])
 
-  const selectPage = (id: string) => setCurrentId(id)
+  const selectPage = (id: string) => {
+    setCurrentId(id)
+    window.history.pushState({}, '', helper?.getUrlById(id) || '')
+  }
 
   return <Tree data={tree} active={currentId} onSelect={selectPage} />
 }

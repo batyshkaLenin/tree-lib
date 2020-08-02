@@ -1,7 +1,7 @@
 import { TAnchor, TreeData, TPage } from './types'
 
-export class TreeHelper {
-  private data: TreeData
+export class TreeUtil {
+  protected data: TreeData
 
   /*
    * Creates a helper object with the required methods
@@ -63,6 +63,12 @@ export class TreeHelper {
     return pages ? this.getPagesByIds(pages) : []
   }
 
+  /*
+   * Get anchor or page parents array
+   * @public
+   * @param {string} id
+   * @returns {TPage[]} array of parents
+   */
   public getParents = (id: string): TPage[] => {
     const parents: TPage[] = []
     let page = this.data.entities.pages[id]
@@ -83,6 +89,12 @@ export class TreeHelper {
     }
   }
 
+  /*
+   * Get page additional data
+   * @public
+   * @param {string} currentId
+   * @param {TPage} page
+   */
   public getPageAdditionalData = (
     currentId: string,
     page: TPage
@@ -130,20 +142,60 @@ export class TreeHelper {
   }
 }
 
-export const getIdByURL = (data: TreeData): string | undefined => {
-  const href = window.location.href
-  const lastPathname = href.split('/')[href.split('/').length - 1]
-  const anchor = Object.values(data.entities.anchors).filter(
-    anchor => `${anchor.url}${anchor.anchor}` === lastPathname
-  )[0]
-  if (anchor) {
-    return anchor.id
+export class TreeHelper extends TreeUtil {
+  /*
+   * Get page or anchor by Id
+   * @public
+   * @param {string} id
+   * @returns {TAnchor | TPage | undefined} item
+   */
+  public getItemById = (id: string) => {
+    if (this.data.entities.pages[id]) {
+      return this.getPageById(id)
+    }
+    if (this.data.entities.anchors[id]) {
+      return this.getAnchorById(id)
+    }
+    return undefined
   }
-  const page = Object.values(data.entities.pages).filter(
-    page => page.url === lastPathname
-  )[0]
-  if (page) {
-    return page.id
+
+  /*
+   * Get url by Id
+   * @public
+   * @param {string} id
+   * @returns {string | undefined} url
+   */
+  public getUrlById = (id: string): string | undefined => {
+    const item = this.getItemById(id) as TAnchor
+    if (item) {
+      if (item.url && item.anchor) {
+        return `${item.url}${item.anchor}`
+      }
+      return item.url
+    }
+    return undefined
   }
-  return undefined
+
+  /*
+   * Get id by url
+   * @public
+   * @returns {string | undefined} anchor or page id
+   */
+  public getIdByURL = (): string | undefined => {
+    const href = window.location.href
+    const lastPathname = href.split('/')[href.split('/').length - 1]
+    const anchor = Object.values(this.data.entities.anchors).filter(
+      anchor => `${anchor.url}${anchor.anchor}` === lastPathname
+    )[0]
+    if (anchor) {
+      return anchor.id
+    }
+    const page = Object.values(this.data.entities.pages).filter(
+      page => page.url === lastPathname
+    )[0]
+    if (page) {
+      return page.id
+    }
+    return undefined
+  }
 }

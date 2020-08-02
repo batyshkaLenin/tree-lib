@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { TreeData, TPage } from './types'
-import { TreeHelper } from './utils'
+import { TreeUtil } from './utils'
 import styles from './styles.module.scss'
 import Loader from './Loader'
 import classNames from 'classnames'
@@ -23,31 +23,16 @@ interface Props {
  * @component
  * @param {Props} props
  * @returns {React.FC<Props>}
- * @example
- * const [tree, setTree] = useState<TreeType>()
- * const [currentId, setCurrentId] = useState<string>('')
- *
- * useEffect(() => {
- *   axios.get('testData.json').then((res) => {
- *    setTree(res.data)
- *    setCurrentId(getIdByURL(res.data) || '')
- *  })
- * }, [])
- *
- * const selectPage = (id: string) => setCurrentId(id)
- *
- * return <Tree data={tree} active={currentId} onSelect={selectPage} />
- * }
  */
 export const Tree: React.FC<Props> = (props: Props) => {
-  const [tree, setTree] = useState<TreeHelper>()
+  const [tree, setTree] = useState<TreeUtil>()
   const [pages, setPages] = useState<TPage[]>()
 
   const loading = !(pages && tree)
 
   useEffect(() => {
     if (props.data) {
-      const tree = new TreeHelper(props.data)
+      const tree = new TreeUtil(props.data)
       setTree(tree)
       setPages(tree.getTree())
     }

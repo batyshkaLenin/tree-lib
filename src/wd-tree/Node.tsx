@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react'
-import { TreeHelper } from './utils'
+import { TreeUtil } from './utils'
 import { TPage } from './types'
 import ExpandButton from './ExpandButton'
 import styles from './styles.module.scss'
@@ -10,7 +10,7 @@ import AnchorsList from './AnchorsList'
 interface Props {
   page: TPage
   active: string
-  tree: TreeHelper
+  tree: TreeUtil
   selectPage: (page: string) => void
 }
 
@@ -23,20 +23,16 @@ const Node = ({ page, tree, selectPage, active }: Props) => {
 
   const changeShow = () => setExpand(prevState => !prevState)
   const onClickLink = useCallback(e => e.preventDefault(), [])
-  const onClickNode = useCallback(
-    e => {
-      if (page.url) {
-        if (!shown) {
-          changeShow()
-        }
-        selectPage(page.id)
-      } else {
+  const onClickNode = useCallback(() => {
+    if (page.url) {
+      if (!shown) {
         changeShow()
       }
-      e.stopPropagation()
-    },
-    [shown, page, selectPage]
-  )
+      selectPage(page.id)
+    } else {
+      changeShow()
+    }
+  }, [shown, page, selectPage])
   const scrollToCurrent = useCallback(
     e => {
       if (highlight && !expanded && e) {

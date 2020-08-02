@@ -1,31 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import axios, { AxiosResponse } from 'axios'
-import { Tree, TreeType, getIdByURL } from 'wd-tree'
+import { Tree, TreeType, TreeHelper } from 'wd-tree'
 
 function App() {
   const [tree, setTree] = useState<TreeType>()
   const [currentId, setCurrentId] = useState<string>('')
+  const [helper, setHelper] = useState<TreeHelper>()
 
   useEffect(() => {
     axios.get('testData.json').then((res: AxiosResponse<TreeType>) => {
       // Timeout for demo skeleton-loader
       setTimeout(() => {
         setTree(res.data)
-        setCurrentId(getIdByURL(res.data) || '')
+        const treeHelper = new TreeHelper(res.data)
+        setHelper(treeHelper)
+        setCurrentId(treeHelper.getIdByURL() || '')
       }, 200)
     })
   }, [])
 
   const selectPage = (id: string) => {
     setCurrentId(id)
-    if (tree?.entities.pages[id]) {
-      const page = tree.entities.pages[id]
-      window.history.pushState({}, '', page.url)
-    }
-    if (tree?.entities.anchors[id]) {
-      const anchor = tree.entities.anchors[id]
-      window.history.pushState({}, '', `${anchor.url}${anchor.anchor}`)
-    }
+    window.history.pushState({}, '', helper?.getUrlById(id) || '')
   }
 
   return <Tree data={tree} active={currentId} onSelect={selectPage} />
