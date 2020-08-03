@@ -12,7 +12,7 @@ const LOADER_LINES = 4
 const Loader: React.FC<Props> = ({ loading }) => {
   const preloaderLines = useMemo(() => {
     const loaderLength = LOADER_BLOCKS * LOADER_LINES
-    return new Array(loaderLength).fill(loaderLength)
+    return Array(loaderLength).fill(loaderLength)
   }, [])
 
   const countLine = useCallback(index => (index % LOADER_LINES) + 1, [])
