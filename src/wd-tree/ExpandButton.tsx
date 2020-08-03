@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
-import { ReactComponent as ExpandIcon } from './Arrow.svg'
 import styles from './styles.module.scss'
 import classNames from 'classnames'
+import ExpandIcon from './ExpandIcon'
 
 interface Props {
   onClick: () => void

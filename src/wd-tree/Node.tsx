@@ -8,26 +8,20 @@ import Anchor from './Anchor'
 
 interface Props {
   page: TPage
-  active: string
+  active?: string
   tree: TreeUtil
   onSelect: (page: string) => void
 }
 
 const Node: React.FC<Props> = ({ page, tree, onSelect, active }) => {
-  const {
-    highlight,
-    selected,
-    shown,
-    hasChildren,
-    anchors,
-    pages,
-  } = useMemo(() => tree.getPageAdditionalData(active, page), [
-    active,
-    page,
-    tree,
-  ])
+  const { highlight, selected, hasChildren, anchors, pages } = useMemo(
+    () => tree.getPageAdditionalData(page, active),
+    [active, page, tree]
+  )
+  const [expanded, setExpand] = useState<boolean>(
+    tree.getParents(active || '').filter(item => item.id === page.id).length > 0
+  )
   const nodeRef = useRef<HTMLLIElement>(null)
-  const [expanded, setExpand] = useState<boolean>(shown)
 
   const changeShow = () => setExpand(prevState => !prevState)
   const handleClickLink = useCallback(e => e.preventDefault(), [])
@@ -47,8 +41,8 @@ const Node: React.FC<Props> = ({ page, tree, onSelect, active }) => {
   )
 
   useEffect(() => {
-    if (highlight && !expanded) {
-      nodeRef?.current?.scrollIntoView({ block: 'center' })
+    if (highlight && !expanded && nodeRef && nodeRef.current) {
+      nodeRef.current.scrollIntoView()
     }
   }, [highlight, expanded])
 

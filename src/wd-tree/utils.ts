@@ -96,16 +96,16 @@ export class TreeUtil {
    * @param {TPage} page
    */
   public getPageAdditionalData = (
-    currentId: string,
-    page: TPage
+    page: TPage,
+    active?: string
   ): {
     selected: boolean
     highlight: boolean
     hasChildren: boolean
     anchors: TAnchor[]
     pages: TPage[]
-    shown: boolean
   } => {
+    const currentId = active || ''
     const selected = currentId === page.id
     return {
       selected,
@@ -117,9 +117,6 @@ export class TreeUtil {
       hasChildren: !!page.pages?.length,
       anchors: this.getAnchors(page.id),
       pages: this.getChildren(page.id),
-      shown:
-        this.getParents(currentId).filter(item => item.id === page.id).length >
-        0,
     }
   }
 

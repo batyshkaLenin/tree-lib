@@ -6,7 +6,7 @@ import { TAnchor } from './types'
 interface Props {
   nodeRef: RefObject<HTMLLIElement>
   anchor: TAnchor
-  active: string
+  active?: string
   onSelect: (url: string) => void
   highlight: boolean
 }
