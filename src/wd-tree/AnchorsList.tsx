@@ -1,9 +1,10 @@
 import { TAnchor, TPage } from './types'
-import React from 'react'
+import React, { RefObject } from 'react'
 import Anchor from './Anchor'
 import styles from './styles.module.scss'
 
 interface Props {
+  nodeRef: RefObject<HTMLLIElement>
   anchors: TAnchor[]
   page: TPage
   active: string
@@ -12,6 +13,7 @@ interface Props {
 }
 
 const AnchorsList: React.FC<Props> = ({
+  nodeRef,
   highlight,
   page,
   anchors,
@@ -22,6 +24,7 @@ const AnchorsList: React.FC<Props> = ({
     <ul className={styles.treeAnchorsList}>
       {anchors.map(anchor => (
         <Anchor
+          nodeRef={nodeRef}
           highlight={highlight}
           anchor={anchor}
           active={active}

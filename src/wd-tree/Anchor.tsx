@@ -1,9 +1,10 @@
 import classNames from 'classnames'
 import styles from './styles.module.scss'
-import React, { useCallback } from 'react'
+import React, { RefObject, useCallback, useEffect } from 'react'
 import { TAnchor, TPage } from './types'
 
 interface Props {
+  nodeRef: RefObject<HTMLLIElement>
   page: TPage
   anchor: TAnchor
   active: string
@@ -11,7 +12,13 @@ interface Props {
   highlight: boolean
 }
 
-const Anchor: React.FC<Props> = ({ highlight, anchor, active, onSelect }) => {
+const Anchor: React.FC<Props> = ({
+  nodeRef,
+  highlight,
+  anchor,
+  active,
+  onSelect,
+}) => {
   const url = `${anchor.url}${anchor.anchor}`
   const selected = anchor.id === active
   const handleClickAnchor = useCallback(
@@ -22,6 +29,12 @@ const Anchor: React.FC<Props> = ({ highlight, anchor, active, onSelect }) => {
     [onSelect, anchor]
   )
   const handleClickLink = useCallback(e => e.preventDefault(), [])
+
+  useEffect(() => {
+    if (selected && highlight) {
+      nodeRef?.current?.scrollIntoView({ block: 'center' })
+    }
+  }, [nodeRef, highlight, selected])
 
   return (
     <li className={styles.treeAnchor} onClick={handleClickAnchor}>

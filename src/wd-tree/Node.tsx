@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { TreeUtil } from './utils'
 import { TPage } from './types'
 import ExpandButton from './ExpandButton'
@@ -19,6 +19,7 @@ const Node: React.FC<Props> = ({ page, tree, onSelect, active }) => {
     () => tree.getPageAdditionalData(active, page),
     [active, page, tree]
   )
+  const nodeRef = useRef<HTMLLIElement>(null)
   const [expanded, setExpand] = useState<boolean>(shown)
 
   const changeShow = () => setExpand(prevState => !prevState)
@@ -37,19 +38,17 @@ const Node: React.FC<Props> = ({ page, tree, onSelect, active }) => {
     },
     [expanded, page, onSelect]
   )
-  const scrollToCurrent = useCallback(
-    e => {
-      if (highlight && !expanded && e) {
-        e.scrollIntoView({ block: 'center' })
-      }
-    },
-    [highlight, expanded]
-  )
+
+  useEffect(() => {
+    if (highlight && !expanded) {
+      nodeRef?.current?.scrollIntoView({ block: 'center' })
+    }
+  }, [highlight, expanded])
 
   return (
     <>
       <li
-        ref={scrollToCurrent}
+        ref={nodeRef}
         className={classNames(
           styles.treeNode,
           styles[`treeNodeLevel${page.level}`]
@@ -85,6 +84,7 @@ const Node: React.FC<Props> = ({ page, tree, onSelect, active }) => {
         </div>
         {(expanded || highlight ? highlight : selected) && (
           <AnchorsList
+            nodeRef={nodeRef}
             highlight={highlight}
             anchors={tree.getAnchors(page.id)}
             page={page}
