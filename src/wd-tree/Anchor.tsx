@@ -1,11 +1,10 @@
 import classNames from 'classnames'
 import styles from './styles.module.scss'
 import React, { RefObject, useCallback, useEffect } from 'react'
-import { TAnchor, TPage } from './types'
+import { TAnchor } from './types'
 
 interface Props {
   nodeRef: RefObject<HTMLLIElement>
-  page: TPage
   anchor: TAnchor
   active: string
   onSelect: (url: string) => void

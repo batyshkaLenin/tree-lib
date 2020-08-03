@@ -102,6 +102,8 @@ export class TreeUtil {
     selected: boolean
     highlight: boolean
     hasChildren: boolean
+    anchors: TAnchor[]
+    pages: TPage[]
     shown: boolean
   } => {
     const selected = currentId === page.id
@@ -113,6 +115,8 @@ export class TreeUtil {
         ? false
         : currentId.includes(page.id),
       hasChildren: !!page.pages?.length,
+      anchors: this.getAnchors(page.id),
+      pages: this.getChildren(page.id),
       shown:
         this.getParents(currentId).filter(item => item.id === page.id).length >
         0,

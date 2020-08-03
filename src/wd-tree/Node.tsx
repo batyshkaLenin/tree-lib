@@ -4,8 +4,7 @@ import { TPage } from './types'
 import ExpandButton from './ExpandButton'
 import styles from './styles.module.scss'
 import classNames from 'classnames'
-import NodesList from './NodesList'
-import AnchorsList from './AnchorsList'
+import Anchor from './Anchor'
 
 interface Props {
   page: TPage
@@ -15,10 +14,18 @@ interface Props {
 }
 
 const Node: React.FC<Props> = ({ page, tree, onSelect, active }) => {
-  const { highlight, selected, shown, hasChildren } = useMemo(
-    () => tree.getPageAdditionalData(active, page),
-    [active, page, tree]
-  )
+  const {
+    highlight,
+    selected,
+    shown,
+    hasChildren,
+    anchors,
+    pages,
+  } = useMemo(() => tree.getPageAdditionalData(active, page), [
+    active,
+    page,
+    tree,
+  ])
   const nodeRef = useRef<HTMLLIElement>(null)
   const [expanded, setExpand] = useState<boolean>(shown)
 
@@ -82,24 +89,39 @@ const Node: React.FC<Props> = ({ page, tree, onSelect, active }) => {
             <ExpandButton expand={expanded} onClick={changeShow} />
           ) : null}
         </div>
-        {(expanded || highlight ? highlight : selected) && (
-          <AnchorsList
-            nodeRef={nodeRef}
-            highlight={highlight}
-            anchors={tree.getAnchors(page.id)}
-            page={page}
-            active={active}
-            onSelect={onSelect}
-          />
-        )}
-        {expanded && (
-          <NodesList
-            active={active}
-            pages={tree.getChildren(page.id)}
-            tree={tree}
-            onSelect={onSelect}
-          />
-        )}
+        {(expanded || highlight ? highlight : selected) &&
+          (anchors.length ? (
+            <ul className={styles.treeAnchorsList}>
+              {anchors.map(anchor => (
+                <Anchor
+                  nodeRef={nodeRef}
+                  highlight={highlight}
+                  anchor={anchor}
+                  active={active}
+                  onSelect={onSelect}
+                  key={anchor.id}
+                />
+              ))}
+            </ul>
+          ) : (
+            <></>
+          ))}
+        {expanded &&
+          (pages.length ? (
+            <ul className={styles.treeNodesList}>
+              {pages.map(page => (
+                <Node
+                  active={active}
+                  page={page}
+                  onSelect={onSelect}
+                  tree={tree}
+                  key={page.id}
+                />
+              ))}
+            </ul>
+          ) : (
+            <></>
+          ))}
       </li>
     </>
   )
