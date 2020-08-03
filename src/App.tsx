@@ -13,8 +13,8 @@ function App() {
       setTimeout(() => {
         setTree(res.data)
         const treeHelper = new TreeHelper(res.data)
-        setHelper(treeHelper)
         setCurrentId(treeHelper.getIdByURL() || '')
+        setHelper(treeHelper)
       }, 200)
     })
   }, [])
@@ -24,7 +24,14 @@ function App() {
     window.history.pushState({}, '', helper?.getUrlById(id) || '')
   }
 
-  return <Tree data={tree} active={currentId} onSelect={selectPage} />
+  return (
+    <Tree
+      data={tree}
+      topLevelIds={tree?.topLevelIds}
+      active={currentId}
+      onSelect={selectPage}
+    />
+  )
 }
 
 export default App

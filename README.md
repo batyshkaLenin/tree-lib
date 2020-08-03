@@ -39,7 +39,13 @@ function App() {
 }
 ```
 
-## Useful features
+The component also has the following properties API:
+
+- `isLoading` - status of loading for component
+- `topLevelIds` - array of top-level ids for rendering tree
+- `className` - classNames for styling tree
+
+## Useful features for development
 
 - Prettier. Formats your code according to the rules in [`.prettierc`](.prettierrc). In WebStorm keyboard shortcut `Alt+Shift+Ctrl+P`.
 - Husky. Hook before committing. If you forgot to format your code, then Husky will launch the Prettier before committing.
