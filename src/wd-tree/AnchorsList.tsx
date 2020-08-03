@@ -17,7 +17,7 @@ const AnchorsList: React.FC<Props> = ({
   anchors,
   onSelect,
   active,
-}: Props) => {
+}) => {
   return anchors.length ? (
     <ul className={styles.treeAnchorsList}>
       {anchors.map(anchor => (

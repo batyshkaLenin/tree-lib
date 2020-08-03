@@ -16,6 +16,7 @@ interface Props {
   data?: TreeData
   onSelect: (id: string) => void
   active: string
+  className?: string
 }
 
 /*
@@ -24,32 +25,37 @@ interface Props {
  * @param {Props} props
  * @returns {React.FC<Props>}
  */
-export const Tree: React.FC<Props> = (props: Props) => {
+export const Tree: React.FC<Props> = ({
+  data,
+  onSelect,
+  active,
+  className,
+}) => {
   const [tree, setTree] = useState<TreeUtil>()
   const [pages, setPages] = useState<TPage[]>()
 
   const loading = !(pages && tree)
 
   useEffect(() => {
-    if (props.data) {
-      const tree = new TreeUtil(props.data)
+    if (data) {
+      const tree = new TreeUtil(data)
       setTree(tree)
       setPages(tree.getTree())
     }
-  }, [props.data])
+  }, [data])
 
   return (
-    <div className={styles.root}>
+    <div className={classNames(styles.root, className)}>
       <Loader loading={loading} />
       {pages && tree && (
         <ul className={classNames(styles.tree, styles.treeNav)}>
-          {pages.map((i, key) => (
+          {pages.map(page => (
             <Node
-              active={props.active}
-              page={i}
-              onSelect={props.onSelect}
+              active={active}
+              page={page}
+              onSelect={onSelect}
               tree={tree}
-              key={key}
+              key={page.id}
             />
           ))}
         </ul>

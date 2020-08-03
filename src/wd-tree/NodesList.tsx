@@ -11,12 +11,7 @@ interface Props {
   onSelect: (url: string) => void
 }
 
-const NodesList: React.FC<Props> = ({
-  pages,
-  tree,
-  onSelect,
-  active,
-}: Props) => {
+const NodesList: React.FC<Props> = ({ pages, tree, onSelect, active }) => {
   return pages.length ? (
     <ul className={styles.treeNodesList}>
       {pages.map(page => (

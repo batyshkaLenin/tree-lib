@@ -6,7 +6,7 @@ interface Props {
   loading: boolean
 }
 
-const Loader = ({ loading }: Props) => {
+const Loader: React.FC<Props> = ({ loading }) => {
   return loading ? (
     <div className={classNames(styles.loader, loading && styles.loaderVisible)}>
       <div className={classNames(styles.loaderLine, styles.loaderLine1)} />

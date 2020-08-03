@@ -11,12 +11,7 @@ interface Props {
   highlight: boolean
 }
 
-const Anchor: React.FC<Props> = ({
-  highlight,
-  anchor,
-  active,
-  onSelect,
-}: Props) => {
+const Anchor: React.FC<Props> = ({ highlight, anchor, active, onSelect }) => {
   const url = `${anchor.url}${anchor.anchor}`
   const selected = anchor.id === active
   const handleClickAnchor = useCallback(

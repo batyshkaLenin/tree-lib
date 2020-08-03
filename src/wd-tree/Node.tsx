@@ -14,7 +14,7 @@ interface Props {
   onSelect: (page: string) => void
 }
 
-const Node: React.FC<Props> = ({ page, tree, onSelect, active }: Props) => {
+const Node: React.FC<Props> = ({ page, tree, onSelect, active }) => {
   const { highlight, selected, shown, hasChildren } = useMemo(
     () => tree.getPageAdditionalData(active, page),
     [active, page, tree]
