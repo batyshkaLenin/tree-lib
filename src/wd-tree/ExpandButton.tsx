@@ -8,7 +8,7 @@ interface Props {
   expand: boolean
 }
 
-const ExpandButton = ({ expand, onClick }: Props) => {
+const ExpandButton: React.FC<Props> = ({ expand, onClick }: Props) => {
   const expandClick = useCallback(
     e => {
       onClick()

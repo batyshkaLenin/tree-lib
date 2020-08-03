@@ -7,34 +7,39 @@ interface Props {
   page: TPage
   anchor: TAnchor
   active: string
-  selectPage: (url: string) => void
+  onSelect: (url: string) => void
   highlight: boolean
 }
 
-const Anchor = ({ highlight, anchor, active, selectPage }: Props) => {
+const Anchor: React.FC<Props> = ({
+  highlight,
+  anchor,
+  active,
+  onSelect,
+}: Props) => {
   const url = `${anchor.url}${anchor.anchor}`
   const selected = anchor.id === active
-  const onClickAnchor = useCallback(
+  const handleClickAnchor = useCallback(
     e => {
-      selectPage(anchor.id)
+      onSelect(anchor.id)
       e.stopPropagation()
     },
-    [selectPage, anchor]
+    [onSelect, anchor]
   )
-  const onClickLink = useCallback(e => e.preventDefault(), [])
+  const handleClickLink = useCallback(e => e.preventDefault(), [])
 
   return (
-    <li className={styles.treeAnchor} onClick={onClickAnchor}>
+    <li className={styles.treeAnchor} onClick={handleClickAnchor}>
       <a
         className={classNames(
           styles.treeTitle,
-          selected && highlight && styles.treeTitleSelected,
           styles.treeTitleLink,
-          styles[`treeAnchorTitleLevel${anchor.level}`]
+          styles[`treeAnchorTitleLevel${anchor.level}`],
+          selected && highlight && styles.treeTitleSelected
         )}
         tabIndex={0}
         href={url}
-        onClick={onClickLink}
+        onClick={handleClickLink}
       >
         {anchor.title}
       </a>

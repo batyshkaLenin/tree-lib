@@ -7,27 +7,27 @@ interface Props {
   anchors: TAnchor[]
   page: TPage
   active: string
-  selectPage: (id: string) => void
+  onSelect: (id: string) => void
   highlight: boolean
 }
 
-const AnchorsList = ({
+const AnchorsList: React.FC<Props> = ({
   highlight,
   page,
   anchors,
-  selectPage,
+  onSelect,
   active,
 }: Props) => {
   return anchors.length ? (
     <ul className={styles.treeAnchorsList}>
-      {anchors.map((anchor, key) => (
+      {anchors.map(anchor => (
         <Anchor
           highlight={highlight}
           anchor={anchor}
           active={active}
           page={page}
-          selectPage={selectPage}
-          key={key}
+          onSelect={onSelect}
+          key={anchor.id}
         />
       ))}
     </ul>

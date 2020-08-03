@@ -47,7 +47,7 @@ export const Tree: React.FC<Props> = (props: Props) => {
             <Node
               active={props.active}
               page={i}
-              selectPage={props.onSelect}
+              onSelect={props.onSelect}
               tree={tree}
               key={key}
             />

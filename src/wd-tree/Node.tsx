@@ -11,10 +11,10 @@ interface Props {
   page: TPage
   active: string
   tree: TreeUtil
-  selectPage: (page: string) => void
+  onSelect: (page: string) => void
 }
 
-const Node = ({ page, tree, selectPage, active }: Props) => {
+const Node: React.FC<Props> = ({ page, tree, onSelect, active }: Props) => {
   const { highlight, selected, shown, hasChildren } = useMemo(
     () => tree.getPageAdditionalData(active, page),
     [active, page, tree]
@@ -22,20 +22,20 @@ const Node = ({ page, tree, selectPage, active }: Props) => {
   const [expanded, setExpand] = useState<boolean>(shown)
 
   const changeShow = () => setExpand(prevState => !prevState)
-  const onClickLink = useCallback(e => e.preventDefault(), [])
-  const onClickNode = useCallback(
+  const handleClickLink = useCallback(e => e.preventDefault(), [])
+  const handleClickNode = useCallback(
     e => {
       if (page.url) {
         if (!expanded) {
           changeShow()
         }
-        selectPage(page.id)
+        onSelect(page.id)
       } else {
         changeShow()
       }
       e.stopPropagation()
     },
-    [expanded, page, selectPage]
+    [expanded, page, onSelect]
   )
   const scrollToCurrent = useCallback(
     e => {
@@ -54,31 +54,27 @@ const Node = ({ page, tree, selectPage, active }: Props) => {
           styles.treeNode,
           styles[`treeNodeLevel${page.level}`]
         )}
-        onClick={onClickNode}
+        onClick={handleClickNode}
       >
         <div className={styles.treeTitleWrapper}>
           {page.url ? (
             <a
-              className={classNames(
-                styles.treeTitle,
-                hasChildren && styles.treeTitleHasChildren,
-                styles.treeTitleLink,
-                highlight && styles.treeTitleSelected
-              )}
+              className={classNames(styles.treeTitle, styles.treeTitleLink, {
+                [styles.treeTitleHasChildren]: hasChildren,
+                [styles.treeTitleSelected]: highlight,
+              })}
               tabIndex={0}
               href={page.url}
-              onClick={onClickLink}
+              onClick={handleClickLink}
             >
               {page.title}
             </a>
           ) : (
             <div
-              className={classNames(
-                styles.treeTitle,
-                hasChildren && styles.treeTitleHasChildren,
-                styles.treeTitleLink,
-                highlight && styles.treeTitleSelected
-              )}
+              className={classNames(styles.treeTitle, styles.treeTitleLink, {
+                [styles.treeTitleHasChildren]: hasChildren,
+                [styles.treeTitleSelected]: highlight,
+              })}
             >
               {page.title}
             </div>
@@ -93,7 +89,7 @@ const Node = ({ page, tree, selectPage, active }: Props) => {
             anchors={tree.getAnchors(page.id)}
             page={page}
             active={active}
-            selectPage={selectPage}
+            onSelect={onSelect}
           />
         )}
         {expanded && (
@@ -101,7 +97,7 @@ const Node = ({ page, tree, selectPage, active }: Props) => {
             active={active}
             pages={tree.getChildren(page.id)}
             tree={tree}
-            selectPage={selectPage}
+            onSelect={onSelect}
           />
         )}
       </li>

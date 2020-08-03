@@ -8,19 +8,24 @@ interface Props {
   pages: TPage[]
   active: string
   tree: TreeUtil
-  selectPage: (url: string) => void
+  onSelect: (url: string) => void
 }
 
-const NodesList = ({ pages, tree, selectPage, active }: Props) => {
+const NodesList: React.FC<Props> = ({
+  pages,
+  tree,
+  onSelect,
+  active,
+}: Props) => {
   return pages.length ? (
     <ul className={styles.treeNodesList}>
-      {pages.map((page, key) => (
+      {pages.map(page => (
         <Node
           active={active}
           page={page}
-          selectPage={selectPage}
+          onSelect={onSelect}
           tree={tree}
-          key={key}
+          key={page.id}
         />
       ))}
     </ul>
