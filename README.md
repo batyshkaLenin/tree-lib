@@ -45,6 +45,13 @@ The component also has the following properties API:
 - `topLevelIds` - array of top-level ids for rendering tree
 - `className` - classNames for styling tree
 
+## Plans for implementation
+
+- [x] Tree MVP
+- [ ] API for choosing link render component
+- [ ] Standalone npm package
+- [ ] Storybook
+
 ## Useful features for development
 
 - Prettier. Formats your code according to the rules in [`.prettierc`](.prettierrc). In WebStorm keyboard shortcut `Alt+Shift+Ctrl+P`.
