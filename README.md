@@ -1,6 +1,6 @@
 # WD Tree
 
-[![Node CI](https://github.com/batyshkaLenin/tree-lib/workflows/Node%20CI/badge.svg)](https://github.com/batyshkaLenin/tree-lib/actions) [![Maintainability](https://api.codeclimate.com/v1/badges/b6bec20046e7535db977/maintainability)](https://codeclimate.com/github/batyshkaLenin/tree-lib/maintainability)
+[![Node CI](https://github.com/batyshkaLenin/tree-lib/workflows/Node%20CI/badge.svg)](https://github.com/batyshkaLenin/tree-lib/actions) [![Maintainability](https://qlty.sh/gh/batyshkaLenin/projects/tree-lib/maintainability.svg)](https://qlty.sh/gh/batyshkaLenin/projects/tree-lib)
 
 React component tree library
 
